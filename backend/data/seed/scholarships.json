@@ -1,0 +1,46 @@
+[
+  {
+    "id": "SCH-01",
+    "name": "Management Merit Scholarship",
+    "amount": 25000,
+    "amount_text": "₹25,000 / annum",
+    "criteria": "Top 3 rankers per branch",
+    "deadline": "September 30",
+    "category": "Merit",
+    "branch_filter": null,
+    "min_cgpa": null
+  },
+  {
+    "id": "SCH-02",
+    "name": "State Post-Matric Scholarship",
+    "amount": 15000,
+    "amount_text": "Fee waiver + ₹15,000",
+    "criteria": "Family income < ₹2.5 LPA, 60%+ marks",
+    "deadline": "August 20",
+    "category": "Economically Weaker",
+    "branch_filter": null,
+    "min_cgpa": null
+  },
+  {
+    "id": "SCH-03",
+    "name": "Women in STEM Fellowship",
+    "amount": 40000,
+    "amount_text": "₹40,000 / annum",
+    "criteria": "Female students, CGPA 8.0+, CSE/ECE/IT",
+    "deadline": "September 5",
+    "category": "Diversity",
+    "branch_filter": ["CSE", "ECE", "IT"],
+    "min_cgpa": 8.0
+  },
+  {
+    "id": "SCH-04",
+    "name": "Academic Excellence Award",
+    "amount": 10000,
+    "amount_text": "₹10,000 / annum",
+    "criteria": "CGPA 9.0+ with 95%+ attendance",
+    "deadline": "October 10",
+    "category": "Merit",
+    "branch_filter": null,
+    "min_cgpa": 9.0
+  }
+]

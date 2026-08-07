@@ -1,0 +1,42 @@
+[
+  {
+    "id": "CLUB-01",
+    "name": "Machine Learning & AI Group (MLAG)",
+    "focus": ["Machine Learning", "Deep Learning", "LLMs", "Computer Vision"],
+    "lead": "Alex Chen & Prof. R. Sharma",
+    "upcoming_meetup": "2026-08-12",
+    "contact": "mlag@vasavi.edu.in"
+  },
+  {
+    "id": "CLUB-02",
+    "name": "VCE ACM Student Chapter",
+    "focus": ["Competitive Programming", "Algorithms", "Hackathons"],
+    "lead": "Priya Sharma",
+    "upcoming_meetup": "2026-08-10",
+    "contact": "acm@vasavi.edu.in"
+  },
+  {
+    "id": "CLUB-03",
+    "name": "Robotics & Embedded Systems Club",
+    "focus": ["Arduino", "Raspberry Pi", "ROS", "Drone Tech"],
+    "lead": "K. Rajesh",
+    "upcoming_meetup": "2026-08-15",
+    "contact": "robotics@vasavi.edu.in"
+  },
+  {
+    "id": "CLUB-04",
+    "name": "Entrepreneurship Cell (E-Cell)",
+    "focus": ["Startups", "Fintech", "Pitching", "Product"],
+    "lead": "Sneha Iyer",
+    "upcoming_meetup": "2026-08-16",
+    "contact": "ecell@vasavi.edu.in"
+  },
+  {
+    "id": "CLUB-05",
+    "name": "Design & Code Collective",
+    "focus": ["UI/UX", "Web Development", "Design Systems", "React"],
+    "lead": "Prof. M. Reddy",
+    "upcoming_meetup": "2026-08-17",
+    "contact": "designcode@vasavi.edu.in"
+  }
+]

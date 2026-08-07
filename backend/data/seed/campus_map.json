@@ -1,0 +1,60 @@
+{
+  "name": "VCE Campus Map",
+  "unit": "meters",
+  "origin": [0, 0],
+  "buildings": [
+    {"id": "ADMIN", "name": "Admin Block", "category": "admin", "x": 20, "y": 20, "floor": "G+2"},
+    {"id": "CS", "name": "CS Building", "category": "academic", "x": 60, "y": 30, "floor": "G+4"},
+    {"id": "ECE", "name": "ECE Block", "category": "academic", "x": 60, "y": 90, "floor": "G+3"},
+    {"id": "MECH", "name": "Mechanical Block", "category": "academic", "x": 20, "y": 120, "floor": "G+2"},
+    {"id": "LIB", "name": "Central Library", "category": "library", "x": 110, "y": 20, "floor": "G+2"},
+    {"id": "AUDI", "name": "Auditorium Block B", "category": "auditorium", "x": 140, "y": 60, "floor": "G+1"},
+    {"id": "CAFE", "name": "Central Cafeteria", "category": "food", "x": 90, "y": 60, "floor": "G"},
+    {"id": "HOST_A", "name": "Hostel A-Block", "category": "hostel", "x": 20, "y": 170, "floor": "G+4"},
+    {"id": "HOST_B", "name": "Hostel B-Block", "category": "hostel", "x": 60, "y": 170, "floor": "G+4"},
+    {"id": "HUB", "name": "Innovation Hub", "category": "facility", "x": 140, "y": 110, "floor": "G+2"},
+    {"id": "GYM", "name": "Sports & Gym Complex", "category": "sports", "x": 110, "y": 150, "floor": "G"},
+    {"id": "MED", "name": "Medical Room", "category": "health", "x": 90, "y": 20, "floor": "G"},
+    {"id": "PLACEMENT", "name": "Placement Cell", "category": "admin", "x": 110, "y": 90, "floor": "G+1"},
+    {"id": "IT_HELP", "name": "IT Helpdesk", "category": "facility", "x": 60, "y": 20, "floor": "G"}
+  ],
+  "facilities": {
+    "atm": ["ADMIN"],
+    "printer": ["LIB", "CS"],
+    "cafeteria": ["CAFE"],
+    "canteen": ["CAFE"],
+    "medical": ["MED"],
+    "gym": ["GYM"],
+    "library": ["LIB"],
+    "auditorium": ["AUDI"],
+    "free_classroom": ["CS", "ECE"],
+    "wifi_help": ["IT_HELP"],
+    "placement_cell": ["PLACEMENT"],
+    "innovation_hub": ["HUB"],
+    "hostel": ["HOST_A", "HOST_B"]
+  },
+  "walkway_nodes": {
+    "n1": {"x": 20, "y": 20},
+    "n2": {"x": 60, "y": 20},
+    "n3": {"x": 110, "y": 20},
+    "n4": {"x": 60, "y": 30},
+    "n5": {"x": 60, "y": 90},
+    "n6": {"x": 60, "y": 60},
+    "n7": {"x": 90, "y": 60},
+    "n8": {"x": 110, "y": 60},
+    "n9": {"x": 140, "y": 60},
+    "n10": {"x": 90, "y": 20},
+    "n11": {"x": 140, "y": 110},
+    "n12": {"x": 110, "y": 90},
+    "n13": {"x": 110, "y": 150},
+    "n14": {"x": 20, "y": 120},
+    "n15": {"x": 20, "y": 170},
+    "n16": {"x": 60, "y": 170}
+  },
+  "walkways": [
+    ["n1", "n2"], ["n2", "n3"], ["n2", "n4"], ["n4", "n5"],
+    ["n5", "n6"], ["n6", "n7"], ["n7", "n8"], ["n8", "n9"],
+    ["n2", "n10"], ["n10", "n3"], ["n8", "n12"], ["n12", "n11"],
+    ["n12", "n13"], ["n1", "n14"], ["n14", "n15"], ["n15", "n16"], ["n16", "n5"]
+  ]
+}

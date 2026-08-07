@@ -1,0 +1,77 @@
+[
+  {
+    "id": "EVT-101",
+    "title": "Google Placement & Internship Prep Workshop",
+    "organizer": "Placement & Training Cell",
+    "category": "Placement Workshop",
+    "date": "2026-08-08",
+    "time": "10:00 AM - 01:00 PM",
+    "location": "Auditorium Block B",
+    "speaker": "Ex-Googler S. Sundar (Staff Software Engineer)",
+    "prerequisites": "Eligible 3rd & 4th Year CSE/ECE/IT students",
+    "seats_left": 34,
+    "tags": ["placement", "interview", "google", "career"]
+  },
+  {
+    "id": "EVT-102",
+    "title": "AgentX National Level Hackathon 2026",
+    "organizer": "HackerRank Campus Crew & VCE ACM",
+    "category": "Hackathon",
+    "date": "2026-08-14",
+    "time": "24-Hour Event",
+    "location": "VCE Innovation Hub & Online",
+    "prizes": "₹1,50,000 Cash Pool + Direct Interview Shorts",
+    "prerequisites": "Open to all years and branches",
+    "seats_left": 12,
+    "tags": ["hackathon", "ai", "coding", "prize"]
+  },
+  {
+    "id": "EVT-103",
+    "title": "Generative AI & LLM Fine-Tuning Masterclass",
+    "organizer": "AI & Data Science Club",
+    "category": "Workshop",
+    "date": "2026-08-11",
+    "time": "02:00 PM - 05:00 PM",
+    "location": "Lab 7, CS Building",
+    "speaker": "Dr. R. Sharma (HOD, CSE)",
+    "prerequisites": "Python basics recommended",
+    "seats_left": 8,
+    "tags": ["ai", "llm", "workshop", "python", "generative"]
+  },
+  {
+    "id": "EVT-104",
+    "title": "Resume Roast & Interview Simulation",
+    "organizer": "Placement & Training Cell",
+    "category": "Placement Workshop",
+    "date": "2026-08-13",
+    "time": "11:00 AM - 01:30 PM",
+    "location": "Seminar Hall, Admin Block",
+    "prerequisites": "Pre-final & final year students",
+    "seats_left": 21,
+    "tags": ["placement", "resume", "interview", "career"]
+  },
+  {
+    "id": "EVT-105",
+    "title": "Robotics & Drone Build Night",
+    "organizer": "Robotics & Embedded Systems Club",
+    "category": "Club Activity",
+    "date": "2026-08-15",
+    "time": "05:00 PM - 08:00 PM",
+    "location": "Innovation Hub, Lab 12",
+    "prerequisites": "Open to all",
+    "seats_left": 15,
+    "tags": ["robotics", "drone", "arduino", "hands-on"]
+  },
+  {
+    "id": "EVT-106",
+    "title": "Fintech & Personal Finance 101",
+    "organizer": "Entrepreneurship Cell",
+    "category": "Guest Talk",
+    "date": "2026-08-16",
+    "time": "03:00 PM - 04:30 PM",
+    "location": "Central Library, AV Room",
+    "prerequisites": "Open to all",
+    "seats_left": 40,
+    "tags": ["finance", "fintech", "career"]
+  }
+]
