@@ -6,7 +6,7 @@
   "description": "AgentX 2026 Smart Campus — MERN + zero-dependency agent service",
   "scripts": {
     "setup": "npm --prefix server install && npm --prefix client install",
-    "dev:agent": "python agent-service/api.py",
+    "dev:agent": "node scripts/run-agent.js",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "dev": "concurrently -k -n agent,api,ui -c yellow,blue,green \"npm:dev:agent\" \"npm:dev:server\" \"npm:dev:client\"",

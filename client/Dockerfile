@@ -8,5 +8,6 @@ COPY client ./client
 
 # Vite dev server proxying /api to the compose "server" service.
 ENV VITE_API_PROXY_TARGET=http://server:5000
+ENV VITE_HOST=0.0.0.0
 EXPOSE 5173
 CMD ["npm", "--prefix", "client", "run", "dev"]

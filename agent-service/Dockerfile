@@ -6,6 +6,8 @@ WORKDIR /app
 COPY . /app
 
 ENV PYTHONIOENCODING=utf-8
+RUN pip install --no-cache-dir -r backend/requirements.txt
+
 EXPOSE 8100
 
 CMD ["python", "agent-service/api.py"]
