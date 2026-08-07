@@ -4,16 +4,19 @@ __pycache__/
 *.py[cod]
 *.db
 *.sqlite3
+backend/data/chroma/
 
 # Node
 node_modules/
 dist/
 *.log
+logs-*.txt
 
 # Env
 .env
 .env.local
 .env.*.local
+!server/.env
 
 # OS / editor
 .DS_Store

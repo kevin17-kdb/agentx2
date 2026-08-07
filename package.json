@@ -1,0 +1,20 @@
+{
+  "name": "agentx-2026",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AgentX 2026 Smart Campus — MERN + zero-dependency agent service",
+  "scripts": {
+    "setup": "npm --prefix server install && npm --prefix client install",
+    "dev:agent": "python agent-service/api.py",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev": "concurrently -k -n agent,api,ui -c yellow,blue,green \"npm:dev:agent\" \"npm:dev:server\" \"npm:dev:client\"",
+    "build": "npm --prefix client run build",
+    "start": "concurrently -k -n agent,api -c yellow,blue \"npm:dev:agent\" \"npm --prefix server run start\"",
+    "verify": "node scripts/verify.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

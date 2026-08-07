@@ -1,93 +1,102 @@
 # AgentX 2026 — Smart Campus Multi-Agent AI System
 
-A hackathon-grade multi-agent AI assistant for **Vasavi College of Engineering**. Ten specialized
-agents autonomously plan, reason, call tools, retrieve from a RAG knowledge base, and stream their
-live reasoning to a glassmorphic UI with five themes.
+A hackathon-grade multi-agent AI assistant for **Vasavi College of Engineering**, migrated to a
+**MERN stack** (v2). Ten specialized agents autonomously plan, reason, call tools, and retrieve from
+a RAG knowledge base; a React client renders the chat, live reasoning trace, human-in-the-loop
+approvals, and a 3D-tilt login page.
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
-│  User chat + live Agent Reasoning Trace (React 19 / Vite 6)    │
+│  React client (Vite) — chat · reasoning trace · HITL · 3D login│
 └───────────────────────────────┬────────────────────────────────┘
-                                │  WebSocket (plan/tool/reason events)
+                                │  REST (buffered JSON, no WS)
 ┌───────────────────────────────▼────────────────────────────────┐
-│  Orchestrator (LangGraph StateGraph)                           │
-│    planner → executor(agent loop) → composer                   │
-│    + conditional edges, retry-once, human-in-the-loop gate     │
+│  Express + Mongoose API (server/)                              │
+│   auth (JWT+bcrypt) · rate limits · proxy to agent service     │
+│   MongoDB (in-memory fallback + auto-seed demo users)          │
 └───────────────┬───────────────────────────┬────────────────────┘
-                │ tool calls                │ context
-┌───────────────▼───────────┐   ┌───────────▼────────────────────┐
-│  10 Agents (typed tools)  │   │  RAG Engine                    │
-│  Academic · Placement     │   │  ChromaDB (hash-embed, offline)│
-│  Events · Services ·      │   │  + BM25 rerank · domain boost  │
-│  Communication ·          │   │  + markdown policy docs        │
-│  Knowledge · Notification │   │                                │
-│  Wellness · Navigator ·   │   │  SQLite seed data (students,   │
-│  Finance                  │   │  events, placements, transport)│
-└───────────────┬───────────┘   └────────────────────────────────┘
+                │ HTTP                         │ HTTP
+┌───────────────▼───────────┐   ┌─────────────▼──────────────────┐
+│  agent-service/           │   │  backend/ (v1 engine, reused)  │
+│  zero-dep stdlib HTTP     │   │  LangGraph orchestrator        │
+│  wrapper on :8100         │   │  10 agents · RAG (hash emb)    │
+└───────────────────────────┘   └────────────────────────────────┘
 ```
 
-## Features
+## Quick start
 
-- **Autonomous orchestration** — LLM (or deterministic fallback) plans steps; LangGraph routes
-  each step to the right agent, runs tool calls, streams live reasoning events.
-- **10 specialized agents** covering every mandated campus feature:
-  - *Academic* (timetable, attendance, GPA, results), *Placement* (eligibility, interviews),
-    *Events* (workshops/hackathons), *Student Services* (IDs, fee desk), *Communication*
-    (makeup-exam email drafting), *Knowledge* (RAG over policy docs), *Notification*
-    (reminders, calendar), *Wellness* (stress resources), *Navigator* (campus paths via BFS),
-    *Finance* (budget planner).
-- **Human-in-the-loop** — drafted emails and grievance tickets pause for explicit approve/reject.
-- **User accounts** — simple username/password register + login with session tokens
-  (PBKDF2-hashed passwords, bearer-token auth on the chat API and WebSocket). No OAuth required.
-- **RAG** — offline vector store (ChromaDB, hash embeddings) + BM25 fallback; no model downloads.
-- **Resilience** — retry-once on tool failure, graceful degradation to a readable fallback answer.
-- **Live reasoning trace** — WebSocket streams `plan → agent_start → tool_call → tool_result →
-  agent_end → final`; the trace panel shows reasoning, planned steps, and the live tool stream.
-- **5 visual themes** — Midnight Aurora (default), Neo-Terminal, Vaporwave, Holo-Deck, Analog Console.
+Prereqs: Node 20+ (v25 used here), Python 3.12+.
+
+```powershell
+# 1. install dependencies
+npm install                       # root (concurrently)
+npm --prefix server install
+npm --prefix client install
+
+# 2. environment — server fails fast without these
+Copy-Item server\.env.example server\.env   # then set JWT_SECRET (server/.env already committed for dev)
+
+# 3. run everything (agent :8100 · api :5000 · ui :5173)
+npm run dev
+```
+
+Open **http://127.0.0.1:5173**. Demo accounts (auto-seeded when the DB is empty):
+
+| username | password  | student | role |
+|---|---|---|---|
+| `admin`  | `admin123` | S102 | admin |
+| `kevin`  | `kevin123` | S101 | student |
+| `emily`  | `emily123` | S103 | student |
+| `messi`  | `messi123` | S104 | student |
+
+### Alternative: Docker
+
+```powershell
+docker compose up --build
+```
+
+The agent service needs no model downloads (deterministic mode). If you set `MONGO_URI`, the server
+uses that database; otherwise it spins up an in-memory MongoDB via `mongodb-memory-server` and seeds
+the four demo users on boot.
+
+## Verify
+
+```powershell
+npm run verify        # 13 end-to-end API checks (login, auth shapes, chat trace, RAG, HITL)
+```
+
+Also in `server/`: the API degrades gracefully — with the agent service down, `/api/chat` returns
+`503 {error:{code:"AGENT_SERVICE_UNAVAILABLE"}}` and `/api/health` reports `agentService:"down"`.
 
 ## Architecture
 
 | Layer | Stack |
 |---|---|
-| Backend | Python 3.14 · FastAPI · Uvicorn · LangGraph · LangChain |
-| LLM | Anthropic Claude (`ANTHROPIC_API_KEY`) with built-in deterministic planner fallback |
-| RAG | ChromaDB (hash embeddings) · BM25 rerank · markdown section chunking |
-| Data | SQLite (seeded) + markdown policy docs |
-| Frontend | React 19 · Vite 6 · Tailwind v4 · Framer Motion · lucide-react · react-markdown |
-| Realtime | FastAPI WebSocket → Vite proxy → React hook |
+| Client | React 19 · Vite 6 · react-router-dom 7 · axios · react-markdown · 3D-tilt login (CSS-only) |
+| API | Express · Mongoose 8 · JWT (`jsonwebtoken`) · bcryptjs · express-rate-limit · CORS allowlist |
+| DB | MongoDB (`mongodb-memory-server` fallback) · auto-seeded demo users |
+| Agent engine | `agent-service/` — zero-dependency stdlib HTTP wrapper around `backend/` (LangGraph, 10 agents, RAG) |
+| Orchestrator | LangGraph StateGraph: planner → executor → composer, retry-once, HITL gate |
+| RAG | ChromaDB (hash embeddings) · BM25 rerank · markdown policy docs, all offline |
 
-## Run it
+### The 10 agents
 
-### 1. Backend
+Academic · Placement · Events · Student Services · Communication · Knowledge · Notification ·
+Wellness · Navigator · Finance.
 
-```powershell
-cd C:\Users\adaba\OneDrive\Documents\Agentx2
-.\.venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
-```
+### API surface
 
-> Set `ANTHROPIC_API_KEY` in your environment to use Claude. Without it, the system runs in
-> `deterministic` mode (no network, fully offline) — a rule-based planner covers all demo queries.
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/auth/login` · `POST /api/auth/register` · `POST /api/auth/logout` | JWT auth (bcrypt-hashed) |
+| `GET /api/auth/me` | Current user (bootstrap / session restore) |
+| `POST /api/chat` | Buffered agent run (trace + `final_markdown_response`; HITL surfaced via `hitl_pending`/`hitl_payload`) |
+| `POST /api/chat/respond` | Human decision on a pending draft (`approve`/`reject`) |
+| `POST /api/rag/search` | Corpus search with citations |
+| `GET /api/health` | Service + agent health |
 
-### 2. Frontend
-
-```powershell
-cd C:\Users\adaba\OneDrive\Documents\Agentx2\frontend
-npm install        # first time only
-npm run dev
-```
-
-Open **http://127.0.0.1:5173** — the Vite dev server proxies `/api` and `/ws` to the backend.
-
-You'll land on a login screen. Demo account: username `student`, password `demo123`
-(linked to student S101). Create your own account from the "Create account" tab and link any
-student profile.
-
-> Auth is required for `/api/chat`, `/api/hitl/respond`, and `/ws/chat`
-> (`Authorization: Bearer <token>`; WebSocket takes `?token=`).
-
-### (Optional) Discord notification webhook
-
-Set `DISCORD_WEBHOOK_URL` to have the notification agent push calendar/reminder digests to Discord.
+Errors are always `{error:{code,message}}` — e.g. `INVALID_CREDENTIALS`, `USERNAME_TAKEN`,
+`TOKEN_EXPIRED` (client redirects to `/login`), `AGENT_SERVICE_UNAVAILABLE`.
 
 ## Try these
 
@@ -99,23 +108,28 @@ Set `DISCORD_WEBHOOK_URL` to have the notification agent push calendar/reminder 
 - "I'm overwhelmed with exams this week — any wellness resources?"
 - "Where's the nearest ATM?" *(navigator BFS path)*
 - "Can I afford a ₹5,000 hackathon trip?" *(finance budget)*
-
-## Verify
-
-- `scripts/smoke_test.py` — routes 13 query scenarios against the expected agents (in-process).
-- `scripts/ws_test.py` — logs in, then asserts the authenticated WebSocket event stream contract.
+- "File a grievance about the wifi in my hostel." *(HITL ticket, 48h SLA)*
 
 ## Repo layout
 
 ```
-backend/
-  main.py            FastAPI app (REST + WebSocket + HITL + auth endpoints)
-  auth.py            username/password auth + session tokens (PBKDF2)
-  core/              events (bus), graph (LangGraph), llm (Claude/deterministic), state
-  agents/            base agent + 10 specialist agents + registry
-  rag/               vector store + retrieval engine
-  data/              SQLite loader + seed JSON + policy markdown docs
-frontend/
-  src/               React app (chat, trace panel, HITL modal, themes)
-scripts/             smoke + websocket verification
+package.json            root scripts (concurrently: npm run dev / verify)
+docker-compose.yml      full stack (agent + api + ui)
+.env.example            shared environment reference
+scripts/verify.js       13-check end-to-end API verification
+agent-service/          zero-dep HTTP wrapper on :8100 (api.py) + Dockerfile
+server/                 Express + Mongoose API (:5000), auto-seed, in-memory Mongo
+client/                 React 19 + Vite UI (:5173), proxy /api → :5000
+backend/                v1 engine (LangGraph + 10 agents + RAG) — tagged v1-stable
+frontend/               v1 React/Tailwind/Framer UI (fallback) — tagged v1-stable
 ```
+
+## Notes
+
+- **Environment**: the server fails fast without `JWT_SECRET` and `PORT`. `server/.env` is committed
+  with a local-dev secret; use `.env.example` templates for real deployments.
+- **Windows**: run the agent service from the repo root (`python agent-service/api.py`) so `backend`
+  imports resolve; prefix `PYTHONIOENCODING=utf-8` for Python output.
+- **HITL**: v2 surfaces drafts/tickets from the buffered response (`hitl_pending` +
+  `hitl_payload`) rather than separate re-approval endpoints; dispatch is recorded via
+  `POST /api/chat/respond` (a stub in buffered mode).
