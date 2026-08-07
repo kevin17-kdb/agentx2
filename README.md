@@ -126,8 +126,8 @@ frontend/               v1 React/Tailwind/Framer UI (fallback) — tagged v1-sta
 
 ## Notes
 
-- **Environment**: the server fails fast without `JWT_SECRET` and `PORT`. `server/.env` is committed
-  with a local-dev secret; use `.env.example` templates for real deployments.
+- **Environment**: the server fails fast without `JWT_SECRET` and `PORT`. Copy `server/.env.example` to
+  `server/.env` (`.env` files are gitignored — never commit credentials).
 - **Windows**: run the agent service from the repo root (`python agent-service/api.py`) so `backend`
   imports resolve; prefix `PYTHONIOENCODING=utf-8` for Python output.
 - **HITL**: v2 surfaces drafts/tickets from the buffered response (`hitl_pending` +

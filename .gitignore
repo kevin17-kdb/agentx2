@@ -16,7 +16,6 @@ logs-*.txt
 .env
 .env.local
 .env.*.local
-!server/.env
 
 # OS / editor
 .DS_Store
