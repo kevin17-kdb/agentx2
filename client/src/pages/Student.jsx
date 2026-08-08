@@ -267,10 +267,10 @@ function OverviewTab({ data }) {
               colors={["#c4f26e", "#a9d95c", "#7cb34f", "#4a7a3d", "#2c4a3e"]}
               height={120}
             />
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
               {data.semesterMarks.map((sem, i) => (
-                <span key={i} className="mf-pill" style={{ fontSize: 9, color: "var(--text-1)" }}>
-                  {sem.sem} · <b style={{ color: "#4a7a3d" }}>{sem.sgpa}</b>
+                <span key={i} className="mf-pill" style={{ fontSize: 13, color: "var(--text-1)", padding: "7px 14px" }}>
+                  {sem.sem} · <b style={{ color: "#4a7a3d", fontSize: 15 }}>{sem.sgpa}</b>
                 </span>
               ))}
             </div>

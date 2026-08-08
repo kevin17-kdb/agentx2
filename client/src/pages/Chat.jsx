@@ -320,8 +320,14 @@ export default function Chat() {
               }
               return (
                 <div key={i} className="msg bot">
-                  <Markdown>{m.content}</Markdown>
-                  {m.result && <Trace result={m.result} />}
+                  <div className="msg-answer">
+                    <Markdown>{m.content}</Markdown>
+                  </div>
+                  {m.result && (
+                    <div className="msg-trace">
+                      <Trace result={m.result} />
+                    </div>
+                  )}
                 </div>
               );
             })}
