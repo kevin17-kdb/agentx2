@@ -148,7 +148,7 @@ export default function Landing() {
           onClick={() => setShowLogin(false)}
           style={{
             position: "absolute",
-            top: 18,
+            top: 72,
             left: 24,
             zIndex: 200,
             background: "color-mix(in srgb, var(--surface) 80%, transparent)",
