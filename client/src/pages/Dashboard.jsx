@@ -62,7 +62,7 @@ export default function Dashboard() {
         display: "flex",
         flexDirection: "column",
         gap: 22,
-        backgroundImage: `linear-gradient(to bottom, rgba(5, 5, 16, 0.65), rgba(5, 5, 16, 0.88)), url('/assets/wave_background.png')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(5, 5, 16, 0.45), rgba(5, 5, 16, 0.85)), url('/assets/wave_background.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: 20,
@@ -71,7 +71,7 @@ export default function Dashboard() {
         border: "1px solid rgba(236, 72, 153, 0.25)",
       }}
     >
-      {/* Hero Banner (inspired by Picture 3 violet wave texture) */}
+      {/* Hero Banner */}
       <section className="slide-up">
         <h1
           style={{
