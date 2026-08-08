@@ -19,7 +19,7 @@ export default function Landing() {
             backdropFilter: "blur(10px)",
           }}
         >
-          ← Back to Presentation
+          ← Back to Overview
         </button>
         <Login />
       </div>
@@ -71,7 +71,7 @@ export default function Landing() {
             A
           </div>
           <div>
-            <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: 0.5 }}>AgentX 2026</div>
+            <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: 0.5 }}>AgentX</div>
             <div style={{ fontSize: 11, opacity: 0.75, letterSpacing: 1, textTransform: "uppercase" }}>
               Sarvepalli Radhakrishna Engineering College
             </div>
@@ -93,14 +93,14 @@ export default function Landing() {
               boxShadow: "0 0 20px rgba(34, 211, 238, 0.4)",
             }}
           >
-            Login →
+            Sign in →
           </button>
         </div>
       </header>
 
       {/* Hero Section */}
       <main style={{ flex: 1, padding: "80px 40px 60px", maxWidth: 1200, margin: "0 auto" }}>
-        <div className="slide-up" style={{ textAlign: "center", maxWidth: 900, margin: "0 auto 60px" }}>
+        <div className="slide-up" style={{ textAlign: "center", maxWidth: 850, margin: "0 auto 60px" }}>
           <span
             className="badge"
             style={{
@@ -112,24 +112,22 @@ export default function Landing() {
               marginBottom: 20,
             }}
           >
-            ✦ Multi-Agent AI Campus OS
+            ✦ Smart Campus Assistant
           </span>
           <h1
             style={{
-              fontSize: "clamp(36px, 5vw, 64px)",
+              fontSize: "clamp(36px, 5vw, 56px)",
               fontWeight: 900,
-              lineHeight: 1.15,
+              lineHeight: 1.2,
               letterSpacing: "-1px",
               margin: "20px 0 24px",
-              background: "linear-gradient(135deg, #ffffff 30%, #22d3ee 70%, #10b981 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: "#ffffff",
             }}
           >
-            A UNIQUE VENUE IN THE HEART OF CAMPUS, WHERE YOUR EVENT & ACADEMIC JOURNEY COMES TO LIFE
+            Welcome to AgentX — Your Smart Campus Assistant
           </h1>
-          <p style={{ fontSize: 18, color: "#cbd5e1", maxWidth: 700, margin: "0 auto 36px", lineHeight: 1.6 }}>
-            Experience 10 autonomous AI agents coordinating timetables, placement eligibility, RAG policy retrieval, wellness support, and instant grievance resolution in real time.
+          <p style={{ fontSize: 18, color: "#cbd5e1", maxWidth: 680, margin: "0 auto 36px", lineHeight: 1.6 }}>
+            Easily check your class schedule, calculate grades, search campus policies, and manage student services all in one place.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
             <button
@@ -144,7 +142,7 @@ export default function Landing() {
                 color: "#020b14",
               }}
             >
-              Get Started · Sign In
+              Sign In to Your Account
             </button>
           </div>
         </div>
@@ -164,9 +162,9 @@ export default function Landing() {
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>🎓</div>
-            <h3 style={{ margin: "0 0 8px", fontSize: 18 }}>Academic & Exam Intelligence</h3>
+            <h3 style={{ margin: "0 0 8px", fontSize: 18 }}>Academic Assistant</h3>
             <p style={{ margin: 0, fontSize: 14, color: "#94a3b8", lineHeight: 1.5 }}>
-              Auto-calculate attendance eligibility, SGPA trends, day-wise timetables, and elective recommendations.
+              Check your attendance, view day-wise timetables, and track previous semester marks.
             </p>
           </div>
 
@@ -180,9 +178,9 @@ export default function Landing() {
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📚</div>
-            <h3 style={{ margin: "0 0 8px", fontSize: 18 }}>RAG Policy Engine</h3>
+            <h3 style={{ margin: "0 0 8px", fontSize: 18 }}>Policy Search</h3>
             <p style={{ margin: 0, fontSize: 14, color: "#94a3b8", lineHeight: 1.5 }}>
-              Instant retrieval-augmented answers over institutional handbooks, scholarship rules, and exam condonation.
+              Search regulations, hostel rules, scholarship criteria, and exam guidelines instantly.
             </p>
           </div>
 
@@ -196,9 +194,9 @@ export default function Landing() {
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📣</div>
-            <h3 style={{ margin: "0 0 8px", fontSize: 18 }}>Direct Grievance & SLA</h3>
+            <h3 style={{ margin: "0 0 8px", fontSize: 18 }}>Student Helpdesk</h3>
             <p style={{ margin: 0, fontSize: 14, color: "#94a3b8", lineHeight: 1.5 }}>
-              File complaints directly to Student Services with category selection, priority SLAs, and real-time status tracking.
+              File grievances directly, check mess schedules, and view transport routes.
             </p>
           </div>
         </div>

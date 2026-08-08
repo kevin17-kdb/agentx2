@@ -3,15 +3,15 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext(null);
 
 const THEMES = [
-  { id: "ocean", name: "Deep Ocean", badge: "Ocean", colors: ["#020b14", "#22d3ee"], swatches: ["#22d3ee", "#0e7490"] },
-  { id: "bluegreen", name: "Blue & Emerald", badge: "Blue & Green", colors: ["#1e40af", "#10b981"], swatches: ["#2563eb", "#10b981"] },
-  { id: "cyber", name: "Electric & Neon", badge: "Cyber", colors: ["#00d2ff", "#00f5d4"], swatches: ["#00d2ff", "#00f5d4"] },
-  { id: "royal", name: "Royal & Violet", badge: "Royal", colors: ["#1d4ed8", "#8b5cf6"], swatches: ["#3b82f6", "#8b5cf6"] },
-  { id: "sunset", name: "Teal & Coral", badge: "Teal & Coral", colors: ["#14b8a6", "#f43f5e"], swatches: ["#14b8a6", "#f43f5e"] },
+  { id: "royal", name: "Royal Violet", badge: "Royal", swatches: ["#3b82f6", "#8b5cf6"] },
+  { id: "cream", name: "Minimal Canvas", badge: "Canvas", swatches: ["#f6f5ee", "#18261e"] },
+  { id: "emerald", name: "Sage Emerald", badge: "Emerald", swatches: ["#eef7f2", "#093829"] },
+  { id: "obsidian", name: "Obsidian Cyber", badge: "Obsidian", swatches: ["#0b0f19", "#06b6d4"] },
+  { id: "warm", name: "Warm Amber", badge: "Amber", swatches: ["#14100c", "#f59e0b"] },
 ];
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem("agentx.theme") || "ocean");
+  const [theme, setTheme] = useState(() => localStorage.getItem("agentx.theme") || "royal");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

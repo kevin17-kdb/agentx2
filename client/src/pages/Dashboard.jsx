@@ -3,43 +3,46 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
-const SCENARIOS = [
+const WORKSPACE_CARDS = [
   {
-    title: "Placement + calendar + reminder",
-    icon: "🎯",
-    desc: "Eligibility check, workshop registration, calendar entry, and a reminder — one command.",
-    query: "Am I eligible for the Google internship? If yes, register me for the placement workshop, add it to my calendar, and remind me before it.",
+    code: "01 · CHAT",
+    title: "AI Assistant",
+    desc: "Multi-agent chat with live execution graph & human review.",
+    badge: "10 agents",
+    to: "/chat",
+    icon: "❖",
   },
   {
-    title: "Exam readiness",
-    icon: "📚",
-    desc: "Summarize exam regulations, check attendance eligibility, and draft a makeup-exam email.",
-    query: "Summarize the examination regulations, calculate my attendance eligibility, and draft a makeup exam email.",
+    code: "02 · CAMPUS",
+    title: "My Campus",
+    desc: "Profile, timetable, attendance, and academic grade sheets.",
+    badge: "Synced",
+    to: "/student",
+    icon: "◉",
   },
   {
-    title: "This week on campus",
-    icon: "🗓",
-    desc: "Today's classes, upcoming AI workshops, and clubs matching your interests.",
-    query: "Show today's classes, upcoming AI workshops, and suggest clubs related to Machine Learning.",
+    code: "03 · SERVICES",
+    title: "Services & Grievance",
+    desc: "Hostel, mess timings, transport passes, and helpdesk SLA.",
+    badge: "6 services",
+    to: "/services",
+    icon: "✦",
   },
   {
-    title: "Wellness check-in",
-    icon: "🌿",
-    desc: "Stressed with exams? Find wellness resources and a plan.",
-    query: "I'm so overwhelmed, I have 2 exams and a hackathon deadline this week. Can you help? What wellness resources are available?",
+    code: "04 · KNOWLEDGE",
+    title: "Knowledge Base",
+    desc: "RAG-powered search across institutional handbooks & rules.",
+    badge: "Indexed",
+    to: "/knowledge",
+    icon: "▣",
   },
-  {
-    title: "Campus navigation",
-    icon: "📍",
-    desc: "Find the nearest ATM or a printer from wherever you are.",
-    query: "Where's the nearest ATM? Also where can I print a document?",
-  },
-  {
-    title: "Budget planner",
-    icon: "💰",
-    desc: "Can you afford that hackathon trip? Let Finance work it out.",
-    query: "Can I afford a 5000 rupee hackathon trip?",
-  },
+];
+
+const QUICK_SCENARIOS = [
+  { title: "Placement & Reminder", query: "Am I eligible for the Google internship? Register me and set a reminder.", icon: "🎯" },
+  { title: "Exam Readiness", query: "Summarize exam regulations and calculate my attendance eligibility.", icon: "📚" },
+  { title: "Campus Navigation", query: "Where's the nearest ATM and printer?", icon: "📍" },
+  { title: "Budget Check", query: "Can I afford a 5000 rupee hackathon trip?", icon: "💰" },
 ];
 
 export default function Dashboard() {
@@ -53,106 +56,66 @@ export default function Dashboard() {
       .catch(() => setHealth({ status: "down" }));
   }, []);
 
-  const firstName = (auth?.user?.name || auth?.user?.username || "there").split(" ")[0];
+  const name = auth?.user?.name || auth?.user?.username || "there";
+  const studentId = auth?.user?.studentId || "S101";
 
   return (
-    <div
-      className="dashboard-wrap fade-in"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 22,
-        backgroundImage: `linear-gradient(to bottom, rgba(5, 5, 16, 0.45), rgba(5, 5, 16, 0.85)), url('/assets/wave_background.png')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        borderRadius: 20,
-        padding: 28,
-        boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6)",
-        border: "1px solid rgba(236, 72, 153, 0.25)",
-      }}
-    >
-      {/* Hero Banner */}
-      <section className="slide-up">
-        <h1
-          style={{
-            margin: "0 0 8px",
-            fontSize: 32,
-            fontWeight: 900,
-            background: "linear-gradient(135deg, #ffffff 40%, #f472b6 80%, #a855f7 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          Real-time AI infrastructure that scales with you
-        </h1>
-        <p className="muted" style={{ margin: 0, fontSize: 15, maxWidth: 650, color: "#cbd5e1" }}>
-          Welcome back, <strong>{firstName}</strong>. Ten specialized campus agents are standing by to coordinate academics, placements, RAG policies, and wellness.
-        </p>
+    <div className="dashboard-container fade-in" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      {/* Humanized Greeting Bar (inspired by user screenshot) */}
+      <section className="greeting-bar-card slide-up">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span className="status-dot ok" />
+            <span style={{ fontSize: 16, fontWeight: 600 }}>
+              Welcome back, <strong>{name}</strong> <span className="font-mono muted">({studentId})</span> · what would you like to get done today?
+            </span>
+          </div>
+          <span className="badge ok" style={{ fontWeight: 700 }}>
+            {health?.agent?.agents_loaded ?? 10} / 10 ACTIVE
+          </span>
+        </div>
       </section>
 
-      {/* Scenario Cards with 3D Flip/Scale Animations */}
+      {/* Main Workspace Grid (inspired by user screenshot) */}
       <section>
-        <div className="grid grid-3">
-          {SCENARIOS.map((s) => (
-            <button
-              key={s.title}
-              className="scenario-card btn-animated flip-card-3d"
-              onClick={() => navigate(`/chat?q=${encodeURIComponent(s.query)}`)}
-              style={{
-                background: "rgba(15, 15, 30, 0.75)",
-                backdropFilter: "blur(14px)",
-                borderColor: "rgba(236, 72, 153, 0.25)",
-              }}
+        <div className="section-label-header">WORKSPACE</div>
+        <div className="grid grid-2" style={{ gap: 16 }}>
+          {WORKSPACE_CARDS.map((card) => (
+            <div
+              key={card.title}
+              className="card btn-animated workspace-card-item"
+              onClick={() => navigate(card.to)}
             >
-              <div className="icon">{s.icon}</div>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
-            </button>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                <span className="font-mono small muted">{card.code}</span>
+                <span className="badge accent" style={{ fontSize: 11 }}>{card.badge}</span>
+              </div>
+              <h3 style={{ margin: "0 0 6px", fontSize: 18, display: "flex", alignItems: "center", gap: 8 }}>
+                <span>{card.icon}</span> {card.title}
+              </h3>
+              <p style={{ margin: 0, fontSize: 13, color: "var(--text-2)", lineHeight: 1.5 }}>
+                {card.desc}
+              </p>
+            </div>
           ))}
         </div>
       </section>
 
+      {/* Quick Actions */}
       <section>
-        <div className="grid grid-2">
-          <div className="card fade-in" style={{ backdropFilter: "blur(14px)", background: "rgba(15, 15, 30, 0.75)", borderColor: "rgba(236, 72, 153, 0.25)" }}>
-            <h3>System Status</h3>
-            {health ? (
-              <>
-                <p>
-                  <span className="badge ok">
-                    <span className="status-dot ok" /> Express API
-                  </span>{" "}
-                  <span className="badge ok">
-                    <span className="status-dot ok" /> MongoDB
-                  </span>{" "}
-                  <span className={`badge${health.agentService === "up" ? " ok" : ""}`}>
-                    <span className={`status-dot ${health.agentService === "up" ? "ok" : "bad"}`} />
-                    Agent Service
-                  </span>
-                </p>
-                <p className="small muted">
-                  llm_mode: <span className="font-mono">{health.agent?.llm_mode || "—"}</span> ·{" "}
-                  agents: {health.agent?.agents_loaded ?? "—"} · rag_docs: {health.agent?.rag_documents ?? "—"}
-                </p>
-              </>
-            ) : (
-              <p className="skeleton" style={{ height: 40 }} />
-            )}
-          </div>
-
-          <div className="card fade-in" style={{ backdropFilter: "blur(14px)", background: "rgba(15, 15, 30, 0.75)", borderColor: "rgba(236, 72, 153, 0.25)" }}>
-            <h3>Your Profile</h3>
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <span className="avatar-lg">{firstName[0]}</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 16 }}>{auth?.user?.name || auth?.user?.username}</div>
-                <div className="font-mono small muted">{auth?.user?.studentId} · {auth?.user?.role}</div>
-              </div>
-            </div>
-            <button className="btn btn-animated" style={{ marginTop: 14 }} onClick={() => navigate("/student")}>
-              Open Student Portal →
+        <div className="section-label-header">QUICK ACTIONS</div>
+        <div className="grid grid-2" style={{ gap: 14 }}>
+          {QUICK_SCENARIOS.map((s) => (
+            <button
+              key={s.title}
+              className="scenario-card btn-animated"
+              onClick={() => navigate(`/chat?q=${encodeURIComponent(s.query)}`)}
+            >
+              <div className="icon">{s.icon}</div>
+              <h3>{s.title}</h3>
+              <p>{s.query}</p>
             </button>
-          </div>
+          ))}
         </div>
       </section>
     </div>

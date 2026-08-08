@@ -5,20 +5,21 @@ import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 
 const NAV = [
-  { to: "/", label: "Dashboard", icon: "◈" },
-  { to: "/chat", label: "Chat", icon: "❖" },
-  { to: "/student", label: "Student", icon: "◉" },
-  { to: "/services", label: "Services", icon: "✦" },
-  { to: "/knowledge", label: "Knowledge", icon: "▣" },
+  { to: "/", label: "Dashboard" },
+  { to: "/chat", label: "Chat" },
+  { to: "/student", label: "Student" },
+  { to: "/services", label: "Services" },
+  { to: "/knowledge", label: "Knowledge" },
 ];
 
-const TITLES = {
-  "/": "Dashboard",
-  "/chat": "Campus Chat",
-  "/student": "Student Portal",
-  "/services": "Campus Services",
-  "/knowledge": "Policy Knowledge Base",
-};
+function AgentXLogo() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" stroke="var(--accent)" strokeWidth="2.5" strokeLinejoin="round"/>
+      <circle cx="16" cy="16" r="5" fill="var(--accent)"/>
+    </svg>
+  );
+}
 
 export default function Layout() {
   const { auth, logout } = useAuth();
@@ -44,42 +45,42 @@ export default function Layout() {
     };
   }, []);
 
-  const path = window.location.pathname;
-  const title = TITLES[path] || "AgentX";
   const initial = (auth?.user?.name || auth?.user?.username || "U").slice(0, 1).toUpperCase();
   const agentUp = health?.agentService === "up";
 
   return (
-    <div className="app">
-      <aside className="sidebar">
-        <div className="brand">
-          <div className="mark">A</div>
-          <div>
-            <h1>AgentX</h1>
-            <small>Campus OS · 2026</small>
-          </div>
+    <div className="app-horizontal">
+      {/* Top Main Navigation Bar (inspired by user screenshot) */}
+      <header className="top-navbar">
+        {/* Brand & Emblem Logo */}
+        <div className="brand-logo" onClick={() => navigate("/")}>
+          <AgentXLogo />
+          <span className="brand-title">AgentX</span>
         </div>
-        {NAV.map((n) => (
-          <NavLink key={n.to} to={n.to} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
-            <span aria-hidden>{n.icon}</span>
-            {n.label}
-          </NavLink>
-        ))}
-        <div className="spacer" />
-        <div className="foot">10 agents · RAG · LangGraph</div>
-      </aside>
 
-      <div className="main">
-        <header className="topbar">
-          <div>
-            <div style={{ fontWeight: 700 }}>{title}</div>
-            <div className="small muted" style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span className={`status-dot ${agentUp ? "ok" : "bad"}`} />
-              {agentUp ? "Agents online" : "Agents offline"}
-            </div>
+        {/* Center Pill Navigation */}
+        <nav className="center-nav-pills">
+          {NAV.map((n) => (
+            <NavLink
+              key={n.to}
+              to={n.to}
+              className={({ isActive }) => `nav-pill-item${isActive ? " active" : ""}`}
+            >
+              {n.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Right Controls & User Info */}
+        <div className="right-controls">
+          {/* Live Agent Status Badge */}
+          <div className="agent-live-badge">
+            <span className={`status-dot ${agentUp ? "ok" : "bad"}`} />
+            <span className="font-mono">{health?.agent?.agents_loaded ?? 10} AGENTS LIVE</span>
           </div>
-          <div className="grow" />
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+
+          {/* Theme Selector Badges */}
+          <div className="theme-selector-pills">
             {themes.map((t) => (
               <button
                 key={t.id}
@@ -90,18 +91,22 @@ export default function Layout() {
               </button>
             ))}
           </div>
-          <div className="user-chip">
-            <span className="avatar">{initial}</span>
-            <span>{auth?.user?.name || auth?.user?.username}</span>
+
+          {/* User Chip */}
+          <div className="user-avatar-chip" title={auth?.user?.name || auth?.user?.username}>
+            {initial}
           </div>
-          <button className="btn btn-ghost" onClick={() => logout().then(() => navigate("/login"))}>
+
+          <button className="btn btn-ghost" style={{ fontSize: 13, padding: "6px 12px" }} onClick={() => logout().then(() => navigate("/login"))}>
             Sign out
           </button>
-        </header>
-        <div className="content">
-          <Outlet />
         </div>
-      </div>
+      </header>
+
+      {/* Page Content View */}
+      <main className="main-content-view">
+        <Outlet />
+      </main>
     </div>
   );
 }
