@@ -41,7 +41,7 @@ const PRESET_POLICIES = [
     category: "conduct",
     title: "Student Code of Conduct & Anti-Ragging",
     doc_id: "POL-COND-01",
-    snippet: "Sarvepalli Radhakrishna Engineering College maintains a zero-tolerance policy towards ragging, harassment, and substance abuse. Violations result in immediate suspension, FIR filing, and permanent expulsion. Grievances can be submitted anonymously.",
+    snippet: "The institute maintains a zero-tolerance policy towards ragging, harassment, and substance abuse. Violations result in immediate suspension, FIR filing, and permanent expulsion. Grievances can be submitted anonymously.",
   },
   {
     category: "sports",

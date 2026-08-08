@@ -212,7 +212,7 @@ export default function Landing() {
           <div>
             <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: 0.5 }}>AgentX</div>
             <div style={{ fontSize: 11, opacity: 0.75, letterSpacing: 1, textTransform: "uppercase", color: "#22d3ee" }}>
-              Sarvepalli Radhakrishna Engineering College
+              Smart Campus AI System
             </div>
           </div>
         </div>
@@ -361,7 +361,7 @@ export default function Landing() {
           zIndex: 10,
         }}
       >
-        Sarvepalli Radhakrishna Engineering College — AgentX Smart Campus OS v2.0
+        AgentX — Smart Campus OS v2.0
       </footer>
     </div>
   );

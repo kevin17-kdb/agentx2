@@ -83,8 +83,7 @@ export default function Login() {
                 AgentX
               </h1>
               <p className="sub" style={{ textAlign: "left" }}>
-                <strong>Sarvepalli Radhakrishna Engineering College</strong> · Fall 2026 ·{" "}
-                <span className="font-mono">v2.0</span>
+                Smart Campus AI System · Fall 2026 · <span className="font-mono">v2.0</span>
               </p>
 
               <div className="tab-row">
