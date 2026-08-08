@@ -171,7 +171,8 @@ class DeterministicPlanner:
         if wellness_hit:
             reasoning_parts.append("Detected stress/overload signals; routing to the Wellness Agent for workload assessment and support.")
             steps.append(PlanStep("wellness", "Assess workload and stress signals", "assess_workload", {"query": query}))
-            steps.append(PlanStep("knowledge", "Retrieve wellness policy and counseling resources", "rag_search", {"query": "wellness counseling support overload policy"}))
+            steps.append(PlanStep("knowledge", "Retrieve wellness policy and counseling resources", "rag_search",
+                                  {"query": "wellness counseling support overload policy", "scope": ["DOC-WELLNESS-POLICYMD"]}))
             if exam_hit or timetable_hit:
                 steps.append(PlanStep("academic", "Summarize upcoming academic load", "upcoming_load", {"student_id": student_id}))
 
@@ -204,7 +205,8 @@ class DeterministicPlanner:
         # --- Exam / attendance ---------------------------------------------
         if exam_hit and not (wellness_hit or spatial_hit):
             reasoning_parts.append("Examination-regulation intent detected; retrieving policy, computing attendance, and preparing actions.")
-            steps.append(PlanStep("knowledge", "Retrieve exam & attendance regulations", "rag_search", {"query": "examination regulations attendance condonation makeup exam"}))
+            steps.append(PlanStep("knowledge", "Retrieve exam & attendance regulations", "rag_search",
+                                  {"query": query, "scope": ["DOC-ATTENDANCE-POLICYMD", "DOC-EXAM-REGULATIONSMD"]}))
             steps.append(PlanStep("academic", "Calculate attendance and eligibility status", "calculate_attendance", {"student_id": student_id}))
             if _contains(q, ["email", "draft", "makeup exam", "permission", "write to", "mail"]):
                 steps.append(PlanStep("communication", "Draft makeup exam permission email (requires approval)", "draft_email", {"student_id": student_id, "kind": "makeup_exam"}))
@@ -250,10 +252,10 @@ class DeterministicPlanner:
                 steps.append(PlanStep("services", "Fetch hostel & residence details", "get_hostel_info", {"student_id": student_id}))
             elif _contains(q, ["library"]):
                 reasoning_parts.append("Library intent detected; retrieving library rules.")
-                steps.append(PlanStep("knowledge", "Retrieve library services policy", "rag_search", {"query": "library timings borrowing fines printer"}))
+                steps.append(PlanStep("knowledge", "Retrieve library services policy", "rag_search", {"query": "library timings borrowing fines printer", "scope": ["DOC-LIBRARY-SERVICESMD"]}))
             elif _contains(q, ["wifi", "wi-fi", "internet"]):
                 reasoning_parts.append("Wi-Fi/IT support intent detected; retrieving network policy.")
-                steps.append(PlanStep("knowledge", "Retrieve Wi-Fi / IT helpdesk policy", "rag_search", {"query": "wifi reset password IT helpdesk"}))
+                steps.append(PlanStep("knowledge", "Retrieve Wi-Fi / IT helpdesk policy", "rag_search", {"query": "wifi reset password IT helpdesk", "scope": ["DOC-LIBRARY-SERVICESMD"]}))
             else:
                 reasoning_parts.append("Student-services intent detected; retrieving campus FAQ.")
                 steps.append(PlanStep("services", "Look up campus FAQ", "get_campus_faq", {"query": query}))

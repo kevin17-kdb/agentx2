@@ -8,7 +8,7 @@ model downloads are required, so retrieval works fully offline.
 import math
 import re
 from collections import Counter
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from backend.data.db import INSTITUTIONAL_DOCS
 from backend.rag.vector_store import vector_store
@@ -27,6 +27,28 @@ DOC_ALIASES = {
     "bus": "transport-services",
     "wellness": "wellness-policy",
     "counseling": "wellness-policy",
+}
+
+# Domains that own specific policy documents. When a planner already knows the
+# intent (e.g. exam/attendance), retrieval should stay inside these documents
+# instead of surfacing passages from the whole campus handbook.
+DOC_SCOPES = {
+    "academic": {
+        "exam-regulations",
+        "attendance-policy",
+    },
+    "wellness": {"wellness-policy"},
+    "library": {"library-services"},
+    "wifi": {"library-services"},
+    "services": {
+        "hostel-rules",
+        "library-services",
+        "scholarship-criteria",
+        "transport-services",
+        "grievance-sla",
+    },
+    "placement": {"placement-eligibility", "scholarship-criteria"},
+    "finance": {"scholarship-criteria"},
 }
 
 
@@ -101,15 +123,22 @@ class RAGEngine:
         return results
 
     # ---- Public search ------------------------------------------------------------
-    def search(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
+    def search(self, query: str, top_k: int = 3, scope: Optional[List[str]] = None) -> List[Dict[str, Any]]:
         query_tokens = self._tokenize(query)
+        allowed_docs = set(scope or [])  # doc-id prefixes (e.g. "DOC-ATTENDANCE-POLICYMD")
+
+        def in_scope(idx: int) -> bool:
+            if not allowed_docs:
+                return True
+            doc_id = self._chunks[idx]["doc_id"]
+            return any(s in doc_id for s in allowed_docs)
 
         # Vector-store candidates
         vec_hits: Dict[int, float] = {}
         if vector_store.available:
             for hit in vector_store.query(query, top_k=top_k * 3):
                 best = self._best_chunk_for(hit.get("content", ""))
-                if best is not None:
+                if best is not None and in_scope(best):
                     vec_hits[best] = max(vec_hits.get(best, 0.0), hit.get("score", 0.0))
 
         # BM25 candidates
@@ -117,7 +146,9 @@ class RAGEngine:
 
         merged: Dict[int, float] = {}
         for r in bm25[:top_k * 4]:
-            merged[r["idx"]] = r["score"]
+            idx = r["idx"]
+            if in_scope(idx):
+                merged[idx] = r["score"]
         for idx, score in vec_hits.items():
             merged[idx] = merged.get(idx, 0.0) + 0.6 * score
 
@@ -137,7 +168,7 @@ class RAGEngine:
         for key, alias in DOC_ALIASES.items():
             if key in query.lower() and not any(alias in r["title"].lower() for r in results):
                 doc = next((d for d in self.documents if alias in d["id"].lower()), None)
-                if doc:
+                if doc and (not allowed_docs or any(s in doc["id"] for s in allowed_docs)):
                     results.append({
                         "doc_id": doc["id"],
                         "title": doc["title"],

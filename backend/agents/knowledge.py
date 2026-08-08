@@ -25,7 +25,8 @@ class KnowledgeAgent(BaseAgent):
         """Retrieve relevant passages from institutional policies via RAG."""
         query = params.get("query", state.get("user_query", ""))
         top_k = int(params.get("top_k", 3))
-        results = rag_engine.search(query, top_k=top_k)
+        scope = params.get("scope")
+        results = rag_engine.search(query, top_k=top_k, scope=scope)
 
         if not results:
             return ToolResult(
