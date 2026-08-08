@@ -146,6 +146,79 @@
   --particle-color: rgba(245, 158, 11, 0.5);
 }
 
+/* ------------------------------------------------------------------ */
+/* Floating Ambient Orbs (Dashboard Background)                        */
+/* ------------------------------------------------------------------ */
+
+.orbs-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 20px;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.25;
+  animation: floatOrb 12s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.orb-1 {
+  width: 320px;
+  height: 320px;
+  background: var(--accent);
+  top: -60px;
+  left: -40px;
+  animation-duration: 14s;
+}
+
+.orb-2 {
+  width: 280px;
+  height: 280px;
+  background: var(--accent-2);
+  bottom: -40px;
+  right: -20px;
+  animation-duration: 10s;
+  animation-delay: -3s;
+}
+
+.orb-3 {
+  width: 200px;
+  height: 200px;
+  background: var(--ok);
+  top: 40%;
+  left: 50%;
+  animation-duration: 16s;
+  animation-delay: -6s;
+}
+
+.orb-4 {
+  width: 240px;
+  height: 240px;
+  background: var(--accent-3);
+  bottom: 20%;
+  left: 10%;
+  animation-duration: 11s;
+  animation-delay: -2s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -30px) scale(1.15);
+  }
+  100% {
+    transform: translate(-30px, 40px) scale(0.9);
+  }
+}
+
 /* Base */
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; }

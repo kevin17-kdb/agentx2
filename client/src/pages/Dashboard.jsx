@@ -45,6 +45,18 @@ const QUICK_SCENARIOS = [
   { title: "Budget Check", query: "Can I afford a 5000 rupee hackathon trip?", icon: "💰" },
 ];
 
+/* Animated floating orb */
+function FloatingOrbs() {
+  return (
+    <div className="orbs-container">
+      <div className="orb orb-1" />
+      <div className="orb orb-2" />
+      <div className="orb orb-3" />
+      <div className="orb orb-4" />
+    </div>
+  );
+}
+
 export default function Dashboard() {
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -60,9 +72,12 @@ export default function Dashboard() {
   const studentId = auth?.user?.studentId || "S101";
 
   return (
-    <div className="dashboard-container fade-in" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      {/* Humanized Greeting Bar (inspired by user screenshot) */}
-      <section className="greeting-bar-card slide-up">
+    <div className="dashboard-container fade-in" style={{ display: "flex", flexDirection: "column", gap: 20, position: "relative" }}>
+      {/* Animated Background Orbs */}
+      <FloatingOrbs />
+
+      {/* Greeting Bar */}
+      <section className="greeting-bar-card slide-up" style={{ position: "relative", zIndex: 2 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span className="status-dot ok" />
@@ -76,15 +91,16 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {/* Main Workspace Grid (inspired by user screenshot) */}
-      <section>
+      {/* Main Workspace Grid */}
+      <section style={{ position: "relative", zIndex: 2 }}>
         <div className="section-label-header">WORKSPACE</div>
         <div className="grid grid-2" style={{ gap: 16 }}>
-          {WORKSPACE_CARDS.map((card) => (
+          {WORKSPACE_CARDS.map((card, i) => (
             <div
               key={card.title}
               className="card btn-animated workspace-card-item"
               onClick={() => navigate(card.to)}
+              style={{ animationDelay: `${i * 0.08}s` }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                 <span className="font-mono small muted">{card.code}</span>
@@ -102,7 +118,7 @@ export default function Dashboard() {
       </section>
 
       {/* Quick Actions */}
-      <section>
+      <section style={{ position: "relative", zIndex: 2 }}>
         <div className="section-label-header">QUICK ACTIONS</div>
         <div className="grid grid-2" style={{ gap: 14 }}>
           {QUICK_SCENARIOS.map((s) => (
