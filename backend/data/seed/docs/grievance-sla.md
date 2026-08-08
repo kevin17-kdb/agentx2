@@ -1,7 +1,7 @@
 # Grievance Redressal & Service Level Agreements
 
 ## Section 1: Channels
-Students may file grievances through the Student Services Agent, the student portal, or email to student-services@vasavi.edu.in.
+Students may file grievances through the Student Services Agent, the student portal, or email to student-services@srec.ac.in.
 
 ## Section 2: Resolution SLA
 - Infrastructure complaints: 48 hours

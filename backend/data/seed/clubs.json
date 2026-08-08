@@ -3,17 +3,17 @@
     "id": "CLUB-01",
     "name": "Machine Learning & AI Group (MLAG)",
     "focus": ["Machine Learning", "Deep Learning", "LLMs", "Computer Vision"],
-    "lead": "Alex Chen & Prof. R. Sharma",
+    "lead": "Kevin & Prof. R. Sharma",
     "upcoming_meetup": "2026-08-12",
-    "contact": "mlag@vasavi.edu.in"
+    "contact": "mlag@srec.ac.in"
   },
   {
     "id": "CLUB-02",
-    "name": "VCE ACM Student Chapter",
+    "name": "SREC ACM Student Chapter",
     "focus": ["Competitive Programming", "Algorithms", "Hackathons"],
-    "lead": "Priya Sharma",
+    "lead": "Admin",
     "upcoming_meetup": "2026-08-10",
-    "contact": "acm@vasavi.edu.in"
+    "contact": "acm@srec.ac.in"
   },
   {
     "id": "CLUB-03",
@@ -21,15 +21,15 @@
     "focus": ["Arduino", "Raspberry Pi", "ROS", "Drone Tech"],
     "lead": "K. Rajesh",
     "upcoming_meetup": "2026-08-15",
-    "contact": "robotics@vasavi.edu.in"
+    "contact": "robotics@srec.ac.in"
   },
   {
     "id": "CLUB-04",
     "name": "Entrepreneurship Cell (E-Cell)",
     "focus": ["Startups", "Fintech", "Pitching", "Product"],
-    "lead": "Sneha Iyer",
+    "lead": "Messi",
     "upcoming_meetup": "2026-08-16",
-    "contact": "ecell@vasavi.edu.in"
+    "contact": "ecell@srec.ac.in"
   },
   {
     "id": "CLUB-05",
@@ -37,6 +37,6 @@
     "focus": ["UI/UX", "Web Development", "Design Systems", "React"],
     "lead": "Prof. M. Reddy",
     "upcoming_meetup": "2026-08-17",
-    "contact": "designcode@vasavi.edu.in"
+    "contact": "designcode@srec.ac.in"
   }
 ]

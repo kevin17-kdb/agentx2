@@ -76,9 +76,9 @@ HOSTEL_DATA = {
         "Lunch": "12:30 - 02:00 PM",
         "Dinner": "07:30 - 09:30 PM",
     },
-    "warden_contact": "warden@vasavi.edu.in | Ext. 204",
+    "warden_contact": "warden@srec.ac.in | Ext. 204",
     "laundry": "Saturday pickups, Ground Floor Office",
-    "wifi": "VCE-ResNet SSID, credentials via intranet portal",
+    "wifi": "SREC-ResNet SSID, credentials via intranet portal",
     "night_out_pass": "Submit 24 hours in advance via Student Portal, approved by Warden",
 }
 

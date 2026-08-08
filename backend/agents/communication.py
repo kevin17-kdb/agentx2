@@ -79,7 +79,7 @@ class CommunicationAgent(BaseAgent):
         kind = params.get("kind", "makeup_exam")
 
         if kind == "makeup_exam":
-            recipient = "Dean of Examinations <examdean@vasavi.edu.in>"
+            recipient = "Dean of Examinations <examdean@srec.ac.in>"
             subject = f"Request for Makeup Examination — {student['name']} ({student['roll_number']})"
             body = (
                 f"Dear Dean of Examinations,\n\n"
@@ -93,7 +93,7 @@ class CommunicationAgent(BaseAgent):
                 f"Sincerely,\n{student['name']}\nContact: {student['email']}"
             )
         else:
-            recipient = params.get("recipient", "Office <office@vasavi.edu.in>")
+            recipient = params.get("recipient", "Office <office@srec.ac.in>")
             subject = params.get("subject", "Official Correspondence")
             body = params.get("body", "Dear Sir/Madam,\n\nPlease find attached my request.\n\nThank you,\n" + student["name"])
 
