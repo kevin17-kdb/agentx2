@@ -43,14 +43,14 @@ function CyberParticleBackground() {
         canvas.width / 2, canvas.height / 3, 100,
         canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
       );
-      bgGrad.addColorStop(0, "#091426");
-      bgGrad.addColorStop(0.5, "#040914");
-      bgGrad.addColorStop(1, "#020409");
+      bgGrad.addColorStop(0, "#10241b");
+      bgGrad.addColorStop(0.5, "#0b1a13");
+      bgGrad.addColorStop(1, "#061008");
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw subtle perspective grid lines
-      ctx.strokeStyle = "rgba(34, 211, 238, 0.04)";
+      ctx.strokeStyle = "rgba(196, 242, 110, 0.04)";
       ctx.lineWidth = 1;
       const gridSize = 60;
       for (let x = 0; x < canvas.width; x += gridSize) {
@@ -84,9 +84,9 @@ function CyberParticleBackground() {
         }
 
         // Draw particle node
-        ctx.fillStyle = "#22d3ee";
+        ctx.fillStyle = "#c4f26e";
         ctx.shadowBlur = 10;
-        ctx.shadowColor = "#22d3ee";
+        ctx.shadowColor = "#c4f26e";
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -100,7 +100,7 @@ function CyberParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 140) {
-            ctx.strokeStyle = `rgba(34, 211, 238, ${0.25 * (1 - dist / 140)})`;
+            ctx.strokeStyle = `rgba(196, 242, 110, ${0.25 * (1 - dist / 140)})`;
             ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
@@ -184,9 +184,9 @@ export default function Landing() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "20px 40px",
-          borderBottom: "1px solid rgba(34, 211, 238, 0.15)",
+          borderBottom: "1px solid rgba(196, 242, 110, 0.15)",
           backdropFilter: "blur(16px)",
-          background: "rgba(4, 9, 20, 0.65)",
+          background: "rgba(18, 32, 24, 0.65)",
           position: "sticky",
           top: 0,
           zIndex: 50,
@@ -198,20 +198,20 @@ export default function Landing() {
               width: 42,
               height: 42,
               borderRadius: 12,
-              background: "linear-gradient(135deg, #22d3ee, #10b981)",
+              background: "linear-gradient(135deg, #c4f26e, #a9d95c)",
               display: "grid",
               placeItems: "center",
               fontWeight: 900,
               fontSize: 20,
-              color: "#020b14",
-              boxShadow: "0 0 16px rgba(34, 211, 238, 0.4)",
+              color: "#16281f",
+              boxShadow: "0 0 16px rgba(196, 242, 110, 0.4)",
             }}
           >
             A
           </div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: 0.5 }}>AgentX</div>
-            <div style={{ fontSize: 11, opacity: 0.75, letterSpacing: 1, textTransform: "uppercase", color: "#22d3ee" }}>
+            <div style={{ fontSize: 11, opacity: 0.75, letterSpacing: 1, textTransform: "uppercase", color: "#c4f26e" }}>
               Smart Campus AI System
             </div>
           </div>
@@ -226,10 +226,10 @@ export default function Landing() {
               fontSize: 15,
               fontWeight: 700,
               borderRadius: 12,
-              background: "linear-gradient(135deg, #22d3ee, #10b981)",
-              color: "#020b14",
+              background: "linear-gradient(135deg, #c4f26e, #a9d95c)",
+              color: "#16281f",
               border: "none",
-              boxShadow: "0 0 20px rgba(34, 211, 238, 0.4)",
+              boxShadow: "0 0 20px rgba(196, 242, 110, 0.4)",
             }}
           >
             Sign in →
@@ -245,9 +245,9 @@ export default function Landing() {
             style={{
               fontSize: 13,
               padding: "6px 16px",
-              background: "rgba(34, 211, 238, 0.15)",
-              borderColor: "rgba(34, 211, 238, 0.4)",
-              color: "#22d3ee",
+              background: "rgba(196, 242, 110, 0.15)",
+              borderColor: "rgba(196, 242, 110, 0.4)",
+              color: "#c4f26e",
               marginBottom: 20,
             }}
           >
@@ -260,7 +260,7 @@ export default function Landing() {
               lineHeight: 1.2,
               letterSpacing: "-1px",
               margin: "20px 0 24px",
-              background: "linear-gradient(135deg, #ffffff 40%, #22d3ee 80%, #10b981 100%)",
+              background: "linear-gradient(135deg, #ffffff 40%, #c4f26e 80%, #a9d95c 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
@@ -279,9 +279,9 @@ export default function Landing() {
                 fontSize: 16,
                 fontWeight: 700,
                 borderRadius: 14,
-                background: "linear-gradient(135deg, #22d3ee, #10b981)",
-                color: "#020b14",
-                boxShadow: "0 0 30px rgba(34, 211, 238, 0.4)",
+                background: "linear-gradient(135deg, #c4f26e, #a9d95c)",
+                color: "#16281f",
+                boxShadow: "0 0 30px rgba(196, 242, 110, 0.4)",
               }}
             >
               Sign In to Your Account
@@ -297,16 +297,16 @@ export default function Landing() {
           <div
             className="card fade-in"
             style={{
-              background: "rgba(9, 20, 38, 0.75)",
+              background: "rgba(23, 42, 33, 0.75)",
               backdropFilter: "blur(16px)",
-              borderColor: "rgba(34, 211, 238, 0.3)",
+              borderColor: "rgba(196, 242, 110, 0.3)",
               padding: 28,
               boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>🎓</div>
             <h3 style={{ margin: "0 0 8px", fontSize: 18, color: "#ffffff" }}>Academic Assistant</h3>
-            <p style={{ margin: 0, fontSize: 14, color: "#94a3b8", lineHeight: 1.5 }}>
+            <p style={{ margin: 0, fontSize: 14, color: "#9fb3a4", lineHeight: 1.5 }}>
               Check your attendance, view day-wise timetables, and track previous semester marks.
             </p>
           </div>
@@ -314,7 +314,7 @@ export default function Landing() {
           <div
             className="card fade-in"
             style={{
-              background: "rgba(9, 20, 38, 0.75)",
+              background: "rgba(23, 42, 33, 0.75)",
               backdropFilter: "blur(16px)",
               borderColor: "rgba(139, 92, 246, 0.3)",
               padding: 28,
@@ -323,7 +323,7 @@ export default function Landing() {
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📚</div>
             <h3 style={{ margin: "0 0 8px", fontSize: 18, color: "#ffffff" }}>Policy Search</h3>
-            <p style={{ margin: 0, fontSize: 14, color: "#94a3b8", lineHeight: 1.5 }}>
+            <p style={{ margin: 0, fontSize: 14, color: "#9fb3a4", lineHeight: 1.5 }}>
               Search regulations, hostel rules, scholarship criteria, and exam guidelines instantly.
             </p>
           </div>
@@ -331,7 +331,7 @@ export default function Landing() {
           <div
             className="card fade-in"
             style={{
-              background: "rgba(9, 20, 38, 0.75)",
+              background: "rgba(23, 42, 33, 0.75)",
               backdropFilter: "blur(16px)",
               borderColor: "rgba(16, 185, 129, 0.3)",
               padding: 28,
@@ -340,7 +340,7 @@ export default function Landing() {
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📣</div>
             <h3 style={{ margin: "0 0 8px", fontSize: 18, color: "#ffffff" }}>Student Helpdesk</h3>
-            <p style={{ margin: 0, fontSize: 14, color: "#94a3b8", lineHeight: 1.5 }}>
+            <p style={{ margin: 0, fontSize: 14, color: "#9fb3a4", lineHeight: 1.5 }}>
               File grievances directly, check mess schedules, and view transport routes.
             </p>
           </div>
@@ -352,11 +352,11 @@ export default function Landing() {
         style={{
           padding: "24px 40px",
           textAlign: "center",
-          borderTop: "1px solid rgba(34, 211, 238, 0.15)",
+          borderTop: "1px solid rgba(196, 242, 110, 0.15)",
           fontSize: 13,
-          color: "#94a3b8",
+          color: "#9fb3a4",
           backdropFilter: "blur(12px)",
-          background: "rgba(4, 9, 20, 0.65)",
+          background: "rgba(18, 32, 24, 0.65)",
           position: "relative",
           zIndex: 10,
         }}

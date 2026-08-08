@@ -3,11 +3,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext(null);
 
 const THEMES = [
-  { id: "royal", name: "Royal Violet", badge: "Royal", swatches: ["#3b82f6", "#8b5cf6"] },
-  { id: "cream", name: "Minimal Canvas", badge: "Canvas", swatches: ["#f6f5ee", "#18261e"] },
-  { id: "emerald", name: "Sage Emerald", badge: "Emerald", swatches: ["#eef7f2", "#093829"] },
-  { id: "obsidian", name: "Obsidian Cyber", badge: "Obsidian", swatches: ["#0b0f19", "#06b6d4"] },
-  { id: "warm", name: "Warm Amber", badge: "Amber", swatches: ["#14100c", "#f59e0b"] },
+  { id: "royal", name: "Paper Moss", badge: "Paper", swatches: ["#f2efe6", "#2c4a3e"] },
+  { id: "cream", name: "Canvas Cream", badge: "Canvas", swatches: ["#f4f1e9", "#22382e"] },
+  { id: "emerald", name: "Sage Leaf", badge: "Sage", swatches: ["#eef2ea", "#0f3b2c"] },
+  { id: "obsidian", name: "Forest Moss", badge: "Forest", swatches: ["#16281f", "#c4f26e"] },
+  { id: "warm", name: "Ember Canva", badge: "Ember", swatches: ["#f1eadd", "#4a5a2a"] },
 ];
 
 export function ThemeProvider({ children }) {

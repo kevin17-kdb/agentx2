@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import AgentQuery from "../components/AgentQuery";
+import { BarsChart } from "../components/Mforge";
 
 /* ------------------------------------------------------------------ */
 /* Full student mock data with multi-day timetable + semester marks    */
@@ -257,23 +258,22 @@ function OverviewTab({ data }) {
       {/* SGPA Trend */}
       {data.semesterMarks.length > 0 && (
         <div className="card">
-          <h3 style={{ margin: "0 0 14px", fontSize: 15 }}>SGPA Trend</h3>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: 12, height: 120 }}>
-            {data.semesterMarks.map((sem, i) => {
-              const h = (sem.sgpa / 10) * 100;
-              return (
-                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
-                  <span style={{ fontSize: 12, fontWeight: 700, marginBottom: 4, color: "var(--accent)" }}>{sem.sgpa}</span>
-                  <div style={{
-                    width: "100%", maxWidth: 50, height: `${h}%`,
-                    borderRadius: "6px 6px 0 0",
-                    background: `linear-gradient(to top, var(--accent), var(--accent-2))`,
-                    transition: "height 1s ease-out",
-                  }} />
-                  <span className="small muted" style={{ marginTop: 4 }}>{sem.sem}</span>
-                </div>
-              );
-            })}
+          <h3 style={{ margin: "0 0 4px", fontSize: 15 }}>SGPA Trend</h3>
+          <span className="eyebrow-label">Semester performance</span>
+          <div style={{ marginTop: 16 }}>
+            <BarsChart
+              bars={data.semesterMarks.map((sem) => (sem.sgpa / 10) * 100)}
+              peaks={[0, data.semesterMarks.length - 1]}
+              colors={["#c4f26e", "#a9d95c", "#7cb34f", "#4a7a3d", "#2c4a3e"]}
+              height={120}
+            />
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+              {data.semesterMarks.map((sem, i) => (
+                <span key={i} className="mf-pill" style={{ fontSize: 9, color: "var(--text-1)" }}>
+                  {sem.sem} · <b style={{ color: "#4a7a3d" }}>{sem.sgpa}</b>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       )}

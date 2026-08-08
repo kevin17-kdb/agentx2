@@ -16,7 +16,9 @@ function AgentXLogo() {
   return (
     <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" stroke="var(--accent)" strokeWidth="2.5" strokeLinejoin="round"/>
-      <circle cx="16" cy="16" r="5" fill="var(--accent)"/>
+      <path d="M16 6L24 10.5V21.5L16 26V6Z" fill="var(--lime)" opacity="0.28"/>
+      <circle cx="16" cy="16" r="5" fill="var(--lime)"/>
+      <circle cx="16" cy="16" r="1.6" fill="var(--forest)"/>
     </svg>
   );
 }
@@ -56,6 +58,7 @@ export default function Layout() {
         <div className="brand-logo" onClick={() => navigate("/")}>
           <AgentXLogo />
           <span className="brand-title">AgentX</span>
+          <span className="mf-pill"><span className="mf-dot" /> System · V1</span>
         </div>
 
         {/* Center Pill Navigation */}
