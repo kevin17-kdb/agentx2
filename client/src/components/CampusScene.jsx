@@ -99,11 +99,7 @@ export default function CampusScene() {
               <div style={{ fontSize: "11px", color: "var(--text-2)" }}>{badge.sub}</div>
             </div>
           </div>
-        ))}
-      </div>
-
-      <div className="credits" style={{ zIndex: 10, color: "var(--text-2)" }}>
-        Sarvepalli Radhakrishna Engineering College — Smart Campus AI OS
+))}
       </div>
     </div>
   );

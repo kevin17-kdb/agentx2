@@ -150,7 +150,7 @@ export default function Landing() {
             position: "absolute",
             top: 18,
             left: 24,
-            zIndex: 100,
+            zIndex: 200,
             background: "color-mix(in srgb, var(--surface) 80%, transparent)",
             backdropFilter: "blur(10px)",
           }}
