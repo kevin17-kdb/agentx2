@@ -362,33 +362,6 @@ input:focus, select:focus, textarea:focus {
 .md blockquote { border-left: 3px solid var(--accent); margin: 8px 0; padding: 2px 14px; color: var(--text-2); background: color-mix(in srgb, var(--accent) 6%, transparent); border-radius: 0 8px 8px 0; }
 .md hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
 
-/* Knowledge-base citation cards: horizontal row of compact source boxes */
-.kb { margin: 12px 0; }
-.kb h4 {
-  display: flex; align-items: center; gap: 6px; font-size: 12px; letter-spacing: .04em;
-  text-transform: uppercase; color: var(--text-2); margin: 0 0 8px; font-weight: 700;
-}
-.kb-row {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.kb-card {
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px;
-  width: 100%; border: 1px solid var(--border); border-radius: 10px; background: var(--surface);
-  padding: 10px 14px; box-shadow: var(--shadow-card);
-}
-.kb-card-top { display: contents; }
-.kb-card-title { font-size: 13px; font-weight: 800; color: var(--text-1); white-space: nowrap; }
-.kb-rel {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .04em;
-  color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent);
-  padding: 2px 8px; border-radius: 999px; white-space: nowrap;
-}
-.kb-card-snippet { font-size: 12.5px; color: var(--text-2); line-height: 1.5; min-width: 0; }
-@media (max-width: 720px) {
-  .kb-card { grid-template-columns: auto 1fr; }
-  .kb-rel { justify-self: end; }
-}
-
 .chat-input-row { display: flex; gap: 10px; }
 .chat-input-row textarea { flex: 1; resize: none; min-height: 52px; max-height: 140px; color: var(--text-1); background: var(--surface); }
 
