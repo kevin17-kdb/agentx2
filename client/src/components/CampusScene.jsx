@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
 
 /**
- * 3D Space Horizon Scene for Login Page (Picture 1).
- * Features the high-resolution space Earth atmosphere curvature background,
- * starry particle depth, mouse-tracked 3D parallax, and floating glass agent cards.
+ * 3D Space Horizon Scene for Login Page.
+ * Synchronized with the app's active theme palette (supports light and dark themes).
  */
 export default function CampusScene() {
   const containerRef = useRef(null);
@@ -18,14 +17,14 @@ export default function CampusScene() {
     });
   };
 
-  // Floating 3D glass agent cards
+  // Floating 3D agent badges
   const agentBadges = [
-    { icon: "🎓", name: "Academic Agent", sub: "Timetable & Grades", top: "14%", left: "10%", color: "#22d3ee" },
-    { icon: "💼", name: "Placement AI", sub: "Jobs & Internships", top: "22%", left: "70%", color: "#f59e0b" },
-    { icon: "📚", name: "Knowledge RAG", sub: "Policy & Handbooks", top: "65%", left: "8%", color: "#818cf8" },
-    { icon: "🌿", name: "Wellness Bot", sub: "Support & Balance", top: "72%", left: "62%", color: "#2dd4bf" },
-    { icon: "💳", name: "Finance Core", sub: "Fees & Budgeting", top: "42%", left: "78%", color: "#fbbf24" },
-    { icon: "📍", name: "Campus Nav", sub: "ATMs & Maps", top: "44%", left: "4%", color: "#38bdf8" },
+    { icon: "🎓", name: "Academic Agent", sub: "Timetable & Grades", top: "14%", left: "10%" },
+    { icon: "💼", name: "Placement AI", sub: "Jobs & Internships", top: "22%", left: "68%" },
+    { icon: "📚", name: "Knowledge RAG", sub: "Policy & Handbooks", top: "65%", left: "8%" },
+    { icon: "🌿", name: "Wellness Bot", sub: "Support & Balance", top: "72%", left: "62%" },
+    { icon: "💳", name: "Finance Core", sub: "Fees & Budgeting", top: "42%", left: "75%" },
+    { icon: "📍", name: "Campus Nav", sub: "ATMs & Maps", top: "44%", left: "4%" },
   ];
 
   return (
@@ -35,24 +34,12 @@ export default function CampusScene() {
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMousePos({ x: 0, y: 0 })}
       style={{
-        backgroundImage: `url('/assets/space_horizon.png')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        background: "var(--scene-bg)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Dark gradient overlay for contrast */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.6))",
-          zIndex: 1,
-        }}
-      />
-
-      {/* Parallax Star Particles */}
+      {/* Theme-aware particle layer */}
       <div
         style={{
           position: "absolute",
@@ -63,26 +50,26 @@ export default function CampusScene() {
           transition: "transform 0.2s ease-out",
         }}
       >
-        {Array.from({ length: 40 }).map((_, i) => (
+        {Array.from({ length: 35 }).map((_, i) => (
           <div
             key={i}
             style={{
               position: "absolute",
               top: `${(i * 17 + 5) % 95}%`,
               left: `${(i * 23 + 11) % 95}%`,
-              width: `${1 + (i % 3)}px`,
-              height: `${1 + (i % 3)}px`,
+              width: `${2 + (i % 3)}px`,
+              height: `${2 + (i % 3)}px`,
               borderRadius: "50%",
-              background: "#ffffff",
-              boxShadow: "0 0 6px #ffffff",
-              opacity: 0.3 + (i % 5) * 0.15,
+              background: "var(--accent)",
+              boxShadow: "0 0 8px var(--accent)",
+              opacity: 0.35 + (i % 5) * 0.12,
               animation: `blink ${2 + (i % 4)}s infinite alternate`,
             }}
           />
         ))}
       </div>
 
-      {/* Floating 3D Interactive Glass Cards */}
+      {/* Floating 3D Glass Cards synchronized with active theme */}
       <div style={{ position: "absolute", inset: 0, zIndex: 3, pointerEvents: "none" }}>
         {agentBadges.map((badge, i) => (
           <div
@@ -93,9 +80,9 @@ export default function CampusScene() {
               left: badge.left,
               padding: "10px 14px",
               borderRadius: "14px",
-              background: "color-mix(in srgb, var(--surface) 75%, transparent)",
-              border: `1px solid ${badge.color}44`,
-              boxShadow: `0 8px 32px rgba(0,0,0,0.5), 0 0 20px ${badge.color}33`,
+              background: "color-mix(in srgb, var(--surface) 85%, transparent)",
+              border: "1px solid var(--border)",
+              boxShadow: "var(--shadow-pop)",
               backdropFilter: "blur(14px)",
               display: "flex",
               alignItems: "center",
@@ -109,13 +96,13 @@ export default function CampusScene() {
             <span style={{ fontSize: "20px" }}>{badge.icon}</span>
             <div>
               <div style={{ fontWeight: 700, fontSize: "13px", color: "var(--text-1)" }}>{badge.name}</div>
-              <div style={{ fontSize: "11px", color: "var(--text-3)" }}>{badge.sub}</div>
+              <div style={{ fontSize: "11px", color: "var(--text-2)" }}>{badge.sub}</div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="credits" style={{ zIndex: 10 }}>
+      <div className="credits" style={{ zIndex: 10, color: "var(--text-2)" }}>
         Sarvepalli Radhakrishna Engineering College — Smart Campus AI OS
       </div>
     </div>
