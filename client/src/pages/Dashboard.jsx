@@ -62,30 +62,30 @@ export default function Dashboard() {
         display: "flex",
         flexDirection: "column",
         gap: 22,
-        backgroundImage: `linear-gradient(to bottom, rgba(2, 11, 20, 0.75), rgba(2, 11, 20, 0.92)), url('/assets/wave_background.png')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(5, 5, 16, 0.65), rgba(5, 5, 16, 0.88)), url('/assets/wave_background.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: 20,
-        padding: 24,
-        boxShadow: "var(--shadow-pop)",
-        border: "1px solid var(--border)",
+        padding: 28,
+        boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6)",
+        border: "1px solid rgba(236, 72, 153, 0.25)",
       }}
     >
-      {/* Hero Banner (inspired by Picture 3) */}
+      {/* Hero Banner (inspired by Picture 3 violet wave texture) */}
       <section className="slide-up">
         <h1
           style={{
             margin: "0 0 8px",
             fontSize: 32,
             fontWeight: 900,
-            background: "linear-gradient(135deg, var(--text-1), var(--accent))",
+            background: "linear-gradient(135deg, #ffffff 40%, #f472b6 80%, #a855f7 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
         >
           Real-time AI infrastructure that scales with you
         </h1>
-        <p className="muted" style={{ margin: 0, fontSize: 15, maxWidth: 650 }}>
+        <p className="muted" style={{ margin: 0, fontSize: 15, maxWidth: 650, color: "#cbd5e1" }}>
           Welcome back, <strong>{firstName}</strong>. Ten specialized campus agents are standing by to coordinate academics, placements, RAG policies, and wellness.
         </p>
       </section>
@@ -98,6 +98,11 @@ export default function Dashboard() {
               key={s.title}
               className="scenario-card btn-animated flip-card-3d"
               onClick={() => navigate(`/chat?q=${encodeURIComponent(s.query)}`)}
+              style={{
+                background: "rgba(15, 15, 30, 0.75)",
+                backdropFilter: "blur(14px)",
+                borderColor: "rgba(236, 72, 153, 0.25)",
+              }}
             >
               <div className="icon">{s.icon}</div>
               <h3>{s.title}</h3>
@@ -109,7 +114,7 @@ export default function Dashboard() {
 
       <section>
         <div className="grid grid-2">
-          <div className="card fade-in" style={{ backdropFilter: "blur(12px)", background: "color-mix(in srgb, var(--surface) 80%, transparent)" }}>
+          <div className="card fade-in" style={{ backdropFilter: "blur(14px)", background: "rgba(15, 15, 30, 0.75)", borderColor: "rgba(236, 72, 153, 0.25)" }}>
             <h3>System Status</h3>
             {health ? (
               <>
@@ -135,7 +140,7 @@ export default function Dashboard() {
             )}
           </div>
 
-          <div className="card fade-in" style={{ backdropFilter: "blur(12px)", background: "color-mix(in srgb, var(--surface) 80%, transparent)" }}>
+          <div className="card fade-in" style={{ backdropFilter: "blur(14px)", background: "rgba(15, 15, 30, 0.75)", borderColor: "rgba(236, 72, 153, 0.25)" }}>
             <h3>Your Profile</h3>
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <span className="avatar-lg">{firstName[0]}</span>
