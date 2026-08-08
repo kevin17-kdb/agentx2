@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import api, { normalizeError } from "../api/client";
+import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 
@@ -47,6 +47,7 @@ export default function Layout() {
   const path = window.location.pathname;
   const title = TITLES[path] || "AgentX";
   const initial = (auth?.user?.name || auth?.user?.username || "U").slice(0, 1).toUpperCase();
+  const agentUp = health?.agentService === "up";
 
   return (
     <div className="app">
@@ -72,20 +73,20 @@ export default function Layout() {
         <header className="topbar">
           <div>
             <div style={{ fontWeight: 700 }}>{title}</div>
-            <div className="small muted">
-              {health?.agentService === "up" ? "Agents online" : "Agents offline"}
+            <div className="small muted" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span className={`status-dot ${agentUp ? "ok" : "bad"}`} />
+              {agentUp ? "Agents online" : "Agents offline"}
             </div>
           </div>
           <div className="grow" />
-          <div style={{ display: "flex", gap: 6 }}>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {themes.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTheme(t.id)}
-                className="badge"
-                style={theme === t.id ? { color: "var(--accent)", borderColor: "color-mix(in srgb, var(--accent) 40%, transparent)" } : {}}
+                className={`theme-badge${theme === t.id ? " active" : ""}`}
               >
-                {t.name}
+                {t.badge}
               </button>
             ))}
           </div>

@@ -22,12 +22,18 @@ class FinanceAgent(BaseAgent):
         # affordability: extract a rupee amount
         amount = None
         import re
-        m = re.search(r"(?:rs\.?\s*|₹\s*|inr\s*)?([\d,]+)\s*(?:k|thousand)?", query)
-        if m:
-            raw = m.group(1).replace(",", "")
-            amount = int(raw)
-            if "k" in query[m.start():m.end() + 1] or "thousand" in query:
-                amount *= 1000
+        m = re.search(r"(?:rs\.?\s*|₹\s*|inr\s*)(\d[\d,]*)\s*(?:k|thousand)?", query, re.IGNORECASE)
+        if not m:
+            m = re.search(r"(\d[\d,]*)\s*(?:k|thousand|rupees|rs)", query, re.IGNORECASE)
+        if m and m.group(1):
+            try:
+                raw = m.group(1).replace(",", "")
+                if raw.isdigit():
+                    amount = int(raw)
+                    if "k" in query[m.start():m.end() + 1].lower() or "thousand" in query.lower():
+                        amount *= 1000
+            except ValueError:
+                amount = None
 
         due_text = (
             f"- **Tuition (annual)**: ₹{f['tuition_per_year']:,}\n"

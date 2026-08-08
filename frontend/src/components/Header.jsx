@@ -30,7 +30,7 @@ export default function Header({ status, mode, themeId, onThemeChange, studentId
             AgentX <span className="text-accent">2026</span>
           </div>
           <div className="text-[11px] text-ink-dim">
-            Smart Campus Multi-Agent AI · Vasavi College of Engineering
+            Smart Campus Multi-Agent AI · Sarvepalli Radhakrishna Engineering College
           </div>
         </div>
       </div>

@@ -69,6 +69,7 @@ export default function Services() {
               background: active === s.id ? "color-mix(in srgb, var(--accent) 14%, transparent)" : "transparent",
               color: active === s.id ? "var(--accent)" : "var(--text-2)",
               fontWeight: active === s.id ? 600 : 500,
+              transition: "all 0.15s",
             }}
           >
             <span style={{ fontSize: 18 }}>{s.icon}</span>
@@ -80,7 +81,7 @@ export default function Services() {
         ))}
       </div>
 
-      <AgentQuery key={svc.id} query={svc.query} title={svc.label} buttonLabel="Get details" />
+      <AgentQuery key={svc.id} query={svc.query} title={svc.label} buttonLabel="Get details" auto />
     </div>
   );
 }

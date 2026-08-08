@@ -1,6 +1,6 @@
 # AgentX 2026 — Smart Campus Multi-Agent AI System
 
-A hackathon-grade multi-agent AI assistant for **Vasavi College of Engineering**, migrated to a
+A hackathon-grade multi-agent AI assistant for **Sarvepalli Radhakrishna Engineering College**, migrated to a
 **MERN stack** (v2). Ten specialized agents autonomously plan, reason, call tools, and retrieve from
 a RAG knowledge base; a React client renders the chat, live reasoning trace, human-in-the-loop
 approvals, and a 3D-tilt login page.

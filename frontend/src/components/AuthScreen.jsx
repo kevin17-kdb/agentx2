@@ -50,7 +50,7 @@ export default function AuthScreen({ onAuthenticate, themeId }) {
                 AgentX 2026
               </div>
               <div className="mt-1 text-xs text-ink-dim">
-                Smart Campus Multi-Agent AI · Vasavi College of Engineering
+                Smart Campus Multi-Agent AI · Sarvepalli Radhakrishna Engineering College
               </div>
             </div>
           </div>

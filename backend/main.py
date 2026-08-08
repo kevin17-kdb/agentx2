@@ -29,7 +29,7 @@ from backend.agents.registry import AGENTS
 app = FastAPI(
     title="AgentX 2026 — Smart Campus Multi-Agent AI System",
     description="Multi-agent AI system with autonomous planning, RAG, tool calling, agent memory, "
-                "and workflow orchestration (Vasavi College of Engineering)",
+                "and workflow orchestration (Sarvepalli Radhakrishna Engineering College)",
     version="2.0.0",
 )
 
@@ -255,7 +255,7 @@ def read_root() -> Dict[str, Any]:
     return {
         "status": "online",
         "system": "AgentX 2026 — Smart Campus Multi-Agent AI System",
-        "institution": "Vasavi College of Engineering",
+        "institution": "Sarvepalli Radhakrishna Engineering College",
         "version": "2.0.0",
         "llm_mode": llm.mode,
     }

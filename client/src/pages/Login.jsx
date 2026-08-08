@@ -5,13 +5,6 @@ import TiltCard from "../components/TiltCard";
 import { useAuth } from "../context/AuthContext";
 import { normalizeError } from "../api/client";
 
-const DEMO_ACCOUNTS = [
-  { user: "kevin", pass: "kevin123", role: "Student" },
-  { user: "emily", pass: "emily123", role: "Student" },
-  { user: "messi", pass: "messi123", role: "Student" },
-  { user: "admin", pass: "admin123", role: "Admin" },
-];
-
 export default function Login() {
   const { login, register } = useAuth();
   const navigate = useNavigate();
@@ -22,12 +15,6 @@ export default function Login() {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-
-  const fill = (acc) => {
-    setUsername(acc.user);
-    setPassword(acc.pass);
-    setError("");
-  };
 
   const submit = async (e) => {
     e.preventDefault();
@@ -54,13 +41,10 @@ export default function Login() {
 
   return (
     <div className="login-wrap">
-      {/* Left: duotone campus scene */}
-      <div className="login-photo">
-        <CampusScene />
-        <div className="credits">Vasavi College of Engineering — Quad, 6:20 PM</div>
-      </div>
+      {/* Left: Interactive 3D AI Neural Matrix scene */}
+      <CampusScene />
 
-      {/* Right: solid form panel */}
+      {/* Right: Glassmorphism form panel */}
       <div className="login-panel">
         <TiltCard className="login-card">
           <div className="login-inner">
@@ -68,7 +52,7 @@ export default function Login() {
               AgentX
             </h1>
             <p className="sub" style={{ textAlign: "left" }}>
-              <strong>Vasavi College of Engineering</strong> · Fall 2026 ·{" "}
+              <strong>Sarvepalli Radhakrishna Engineering College</strong> · Fall 2026 ·{" "}
               <span className="font-mono">v2.0</span>
             </p>
 
@@ -88,14 +72,14 @@ export default function Login() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoFocus
-                  placeholder="kevin"
+                  placeholder="Enter your username"
                   autoComplete="username"
                 />
               </div>
               {mode === "register" && (
                 <div>
                   <label className="field">Display name</label>
-                  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Kevin" />
+                  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" />
                 </div>
               )}
               <div>
@@ -115,14 +99,6 @@ export default function Login() {
                 {busy ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}
               </button>
             </form>
-
-            <div className="demo-pills">
-              {DEMO_ACCOUNTS.map((acc) => (
-                <button key={acc.user} type="button" className="pill" onClick={() => fill(acc)}>
-                  {acc.user} · {acc.role}
-                </button>
-              ))}
-            </div>
           </div>
         </TiltCard>
       </div>
