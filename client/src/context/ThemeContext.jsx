@@ -3,15 +3,15 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext(null);
 
 const THEMES = [
-  { id: "dark", name: "Midnight Aurora", badge: "Aurora", swatches: ["#2dd4bf", "#8b5cf6", "#fb7185"] },
-  { id: "light", name: "Crystal Light", badge: "Crystal", swatches: ["#0d9488", "#7c3aed", "#e11d48"] },
-  { id: "retro", name: "Amber Console", badge: "Console", swatches: ["#f59e0b", "#ef4444", "#fbbf24"] },
-  { id: "neon", name: "Neon Cyberpunk", badge: "Cyber", swatches: ["#ec4899", "#06b6d4", "#a3e635"] },
-  { id: "ocean", name: "Deep Ocean", badge: "Ocean", swatches: ["#22d3ee", "#a78bfa", "#34d399"] },
+  { id: "ocean", name: "Deep Ocean", badge: "Ocean", colors: ["#020b14", "#22d3ee"], swatches: ["#22d3ee", "#0e7490"] },
+  { id: "bluegreen", name: "Blue & Emerald", badge: "Blue & Green", colors: ["#1e40af", "#10b981"], swatches: ["#2563eb", "#10b981"] },
+  { id: "cyber", name: "Electric & Neon", badge: "Cyber", colors: ["#00d2ff", "#00f5d4"], swatches: ["#00d2ff", "#00f5d4"] },
+  { id: "royal", name: "Royal & Violet", badge: "Royal", colors: ["#1d4ed8", "#8b5cf6"], swatches: ["#3b82f6", "#8b5cf6"] },
+  { id: "sunset", name: "Teal & Coral", badge: "Teal & Coral", colors: ["#14b8a6", "#f43f5e"], swatches: ["#14b8a6", "#f43f5e"] },
 ];
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem("agentx.theme") || "dark");
+  const [theme, setTheme] = useState(() => localStorage.getItem("agentx.theme") || "ocean");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

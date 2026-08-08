@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api, { normalizeError } from "../api/client";
+import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
 const SCENARIOS = [
@@ -56,22 +56,47 @@ export default function Dashboard() {
   const firstName = (auth?.user?.name || auth?.user?.username || "there").split(" ")[0];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
-      <section>
-        <h2 style={{ margin: "0 0 4px" }}>
-          Good {new Date().getHours() < 12 ? "morning" : new Date().getHours() < 17 ? "afternoon" : "evening"}, {firstName}.
-        </h2>
-        <p className="muted" style={{ margin: 0 }}>
-          Ten campus agents are standing by. Pick a scenario or head to the chat.
+    <div
+      className="dashboard-wrap fade-in"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 22,
+        backgroundImage: `linear-gradient(to bottom, rgba(2, 11, 20, 0.75), rgba(2, 11, 20, 0.92)), url('/assets/wave_background.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        borderRadius: 20,
+        padding: 24,
+        boxShadow: "var(--shadow-pop)",
+        border: "1px solid var(--border)",
+      }}
+    >
+      {/* Hero Banner (inspired by Picture 3) */}
+      <section className="slide-up">
+        <h1
+          style={{
+            margin: "0 0 8px",
+            fontSize: 32,
+            fontWeight: 900,
+            background: "linear-gradient(135deg, var(--text-1), var(--accent))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          Real-time AI infrastructure that scales with you
+        </h1>
+        <p className="muted" style={{ margin: 0, fontSize: 15, maxWidth: 650 }}>
+          Welcome back, <strong>{firstName}</strong>. Ten specialized campus agents are standing by to coordinate academics, placements, RAG policies, and wellness.
         </p>
       </section>
 
+      {/* Scenario Cards with 3D Flip/Scale Animations */}
       <section>
         <div className="grid grid-3">
           {SCENARIOS.map((s) => (
             <button
               key={s.title}
-              className="scenario-card"
+              className="scenario-card btn-animated flip-card-3d"
               onClick={() => navigate(`/chat?q=${encodeURIComponent(s.query)}`)}
             >
               <div className="icon">{s.icon}</div>
@@ -84,8 +109,8 @@ export default function Dashboard() {
 
       <section>
         <div className="grid grid-2">
-          <div className="card">
-            <h3>System status</h3>
+          <div className="card fade-in" style={{ backdropFilter: "blur(12px)", background: "color-mix(in srgb, var(--surface) 80%, transparent)" }}>
+            <h3>System Status</h3>
             {health ? (
               <>
                 <p>
@@ -97,7 +122,7 @@ export default function Dashboard() {
                   </span>{" "}
                   <span className={`badge${health.agentService === "up" ? " ok" : ""}`}>
                     <span className={`status-dot ${health.agentService === "up" ? "ok" : "bad"}`} />
-                    Agent service
+                    Agent Service
                   </span>
                 </p>
                 <p className="small muted">
@@ -110,16 +135,17 @@ export default function Dashboard() {
             )}
           </div>
 
-          <div className="card">
-            <h3>Your profile</h3>
-            <p>
+          <div className="card fade-in" style={{ backdropFilter: "blur(12px)", background: "color-mix(in srgb, var(--surface) 80%, transparent)" }}>
+            <h3>Your Profile</h3>
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <span className="avatar-lg">{firstName[0]}</span>
-            </p>
-            <p style={{ margin: "12px 0 0" }}>
-              <span className="font-mono">{auth?.user?.studentId}</span> · {auth?.user?.role}
-            </p>
-            <button className="btn" style={{ marginTop: 10 }} onClick={() => navigate("/student")}>
-              Open student portal →
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>{auth?.user?.name || auth?.user?.username}</div>
+                <div className="font-mono small muted">{auth?.user?.studentId} · {auth?.user?.role}</div>
+              </div>
+            </div>
+            <button className="btn btn-animated" style={{ marginTop: 14 }} onClick={() => navigate("/student")}>
+              Open Student Portal →
             </button>
           </div>
         </div>

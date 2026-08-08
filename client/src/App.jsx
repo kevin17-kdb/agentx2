@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { StudentProvider } from "./context/StudentContext";
 import Layout from "./components/Layout";
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Chat from "./pages/Chat";
@@ -19,6 +20,13 @@ function Protected({ children }) {
   return children;
 }
 
+function PublicAuth() {
+  const { auth, ready } = useAuth();
+  if (!ready) return null;
+  if (auth) return <Navigate to="/" replace />;
+  return <Landing />;
+}
+
 export default function App() {
   return (
     <ThemeProvider>
@@ -26,7 +34,9 @@ export default function App() {
         <StudentProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/login" element={<Login />} />
+              <Route path="/landing" element={<Landing />} />
+              <Route path="/login" element={<PublicAuth />} />
+              <Route path="/login/form" element={<Login />} />
               <Route
                 element={
                   <Protected>
